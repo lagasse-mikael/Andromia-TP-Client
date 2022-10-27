@@ -5,10 +5,16 @@ const router = createRouter({
   history: import.meta.env.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: '/homePage',
       name: 'home',
       component: HomePage
     },
+
+    {
+      path: '/',
+      name: 'login',
+      component: LoginPage
+    }
   ]
 })
 
