@@ -1,7 +1,6 @@
 <template>
-	<div id="loginPage">
-		<div class="row	center col-6" id="login">
-
+	<div id="loginPage" class="mx-auto">
+		<div class="row	center" id="login">
 			<article class="text-center mb-5">
 				<img class="my-3" src="../../assets/img/andromia-logo.png" width="75" height="75">
 				<h1>Bienvenue sur <span id="title">Andromia TP</span></h1>
@@ -24,7 +23,7 @@
 					</div>
 				</form>
 			</article>
-			<article class="my-5 text-center">
+			<article class="my-2 text-center">
 				<RouterLink to="/creationCompte">
 					<a>Pas de compte?</a>
 				</RouterLink>
@@ -97,5 +96,11 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+  }
 </style>

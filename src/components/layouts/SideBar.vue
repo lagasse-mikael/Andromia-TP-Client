@@ -30,6 +30,12 @@
             </template>
         </SideBarItem>
 
+        <SideBarItem url="/creatures" text="Créatures">
+          <template v-slot:icon>
+              <i class="ni ni-world text-success text-sm opacity-10"></i>
+            </template>
+        </SideBarItem>
+
         <!-- <SideBarItem url="/planets" text="Planets">
           <template v-slot:icon>
               <i class="ni ni-world text-success text-sm opacity-10"></i>
