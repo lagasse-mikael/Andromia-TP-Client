@@ -24,9 +24,7 @@
 				</form>
 			</article>
 			<article class="my-2 text-center">
-				<RouterLink to="/creationCompte">
-					<a>Pas de compte?</a>
-				</RouterLink>
+				
 			</article>
 		</div>
 	</div>
@@ -46,9 +44,7 @@
 	const { handleSubmit, meta } = useForm();
 
 	const server_url = import.meta.env.VITE_SERVER_URL
-
-	// let adminChecked = ref(false);
-	// let isUserAdmin = ref(false);
+	
 	let isBackSpace = ref(false);
 	let input;
 	

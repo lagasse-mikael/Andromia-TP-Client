@@ -1,6 +1,5 @@
 <template>
   <div class="row	center col-5">
-
     <!-- Formualaire creation de compte -->
     <div class=" formulaire col-8 row my-5 offset-2 text-right rounded">
       <h1 class="text-center my-3"> Crée votre compte Andromia</h1>

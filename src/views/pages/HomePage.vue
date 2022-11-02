@@ -14,6 +14,9 @@
 import HelloWorld from '../../components/HelloWorld.vue';
 import MainLayout from '../layouts/MainLayout.vue';
 import NavBar from "../layouts/NavBar.vue";
+
+
+
 </script>
 
 <style lang="scss" scoped></style>
