@@ -21,6 +21,11 @@ const router = createRouter({
       name:'register',
       component: CreationPage
     },
+    {
+      path:'/creatures',
+      name:'creatures',
+      component: CreaturePage
+    },
   ]
 })
 
