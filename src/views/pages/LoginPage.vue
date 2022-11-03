@@ -39,7 +39,9 @@
 	import { useToast } from "vue-toastification";
 	import MainLayout from '../layouts/MainLayout.vue';
 	import axios from 'axios';
+	import userInfosStore from '../../stores/userInfos.js';
 
+	const userInfosStore = useUserInfosStore
 	const toast = useToast();
 	const { handleSubmit, meta } = useForm();
 
@@ -67,7 +69,9 @@
 		try {
 			const res = await axios.post(`${server_url}/explorers/login`, user);
 			if(res.status === 200) {
-      			console.log("User loger!");
+				userInfosStore.access_token = res.data.access_token
+				userInfosStore.refresh_token = res.data.refresh_token
+				console.log(userInfosStore);
                 router.push('/homePage');
 			}
 		} catch (err) {

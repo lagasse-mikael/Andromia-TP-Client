@@ -1,9 +1,9 @@
 <template>
 
-  <MainLayout>
+  <MainLayout title="HOME PAGE">
     <div class="py-4 container-fluid">
       <h1>Andromia</h1>
-      <HelloWorld />
+      <HelloWorld msg="c'est cool :D"/>
     </div>
   </MainLayout> 
 

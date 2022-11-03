@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
 
-        <SideBarItem url="/" text="Home">
+        <SideBarItem url="/homePage" text="Home">
             <template v-slot:icon>
               <i class="ni ni-diamond text-primary text-sm opacity-10"></i>
             </template>
