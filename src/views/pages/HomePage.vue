@@ -1,9 +1,7 @@
 <template>
 
-  <MainLayout title="HOME PAGE">
+  <MainLayout title="Historique des explorations">
     <div class="py-4 container-fluid">
-      <h1>Andromia</h1>
-      <HelloWorld msg="c'est cool :D"/>
     </div>
   </MainLayout> 
 

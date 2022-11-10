@@ -69,9 +69,9 @@ async function login(user) {
 	try {
 		const res = await axios.post(`${server_url}/explorers/login`, user);
 		if (res.status === 200) {
-			userInfosStore.access_token = res.data.access_token
-			userInfosStore.refresh_token = res.data.refresh_token
-			console.log(userInfosStore);
+			userInfosStore.access_token = res.data.tokens.access_token
+			userInfosStore.refresh_token = res.data.tokens.refresh_token
+			
 			router.push('/homePage');
 		}
 	} catch (err) {

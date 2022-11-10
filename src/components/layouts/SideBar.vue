@@ -24,23 +24,23 @@
     <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
 
-        <SideBarItem url="/homePage" text="Home">
+        <SideBarItem url="/homePage" text="Historique d'explorations">
             <template v-slot:icon>
-              <i class="ni ni-diamond text-primary text-sm opacity-10"></i>
+              <i class="ni ni-collection text-success text-sm opacity-10"></i>
             </template>
         </SideBarItem>
 
         <SideBarItem url="/creatures" text="Créatures">
           <template v-slot:icon>
-              <i class="ni ni-world text-success text-sm opacity-10"></i>
+              <i class="ni ni-badge text-warning text-sm opacity-10"></i>
             </template>
         </SideBarItem>
 
-        <!-- <SideBarItem url="/planets" text="Planets">
+        <SideBarItem url="/elements" text="Elements">
           <template v-slot:icon>
-              <i class="ni ni-world text-success text-sm opacity-10"></i>
+              <i class="ni ni-atom text-primary text-sm opacity-10"></i>
             </template>
-        </SideBarItem> -->
+        </SideBarItem>
       </ul>
     </div>
   </aside>

@@ -10,8 +10,8 @@
             <ul class="navbar-nav justify-content-end ms-md-auto">
                 <li class="nav-item d-flex align-items-center">
                 <a href="#modLogin" class="px-0 nav-link font-weight-bold text-white" data-bs-toggle="modal" data-bs-target="#modLogin">
-                    <i class="fa fa-user me-sm-2" aria-hidden="true"></i>
-                    <span class="d-sm-inline d-none">Connexion</span>
+                    <i class="ni ni-bold-right me-sm-2" aria-hidden="true"></i>
+                    <span class="d-sm-inline d-none">Deconnexion</span>
                 </a>
                 </li>
             </ul>

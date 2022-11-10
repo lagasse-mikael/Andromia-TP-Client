@@ -24,11 +24,13 @@ import { inject, onMounted, ref } from 'vue';
 import axios from 'axios';
 import MainLayout from '../layouts/MainLayout.vue';
 import NavBar from "../layouts/NavBar.vue";
+import { useUserInfosStore } from '../../stores/userInfos';
 
 // const axios = inject("axios");
-const expID = "635aa4941f59d7987433de26";
 const creatures = ref([])
 const server_url = import.meta.env.VITE_SERVER_URL
+
+const UserInfos = useUserInfosStore();
 
 onMounted(() => {
     retrieveExplorerCreatures();
@@ -36,11 +38,15 @@ onMounted(() => {
 
 async function retrieveExplorerCreatures(){
     try{
-        const response = await axios.get(`${server_url}/explorers/635aa4941f59d7987433de26/creatures`);
+        const response = await axios.get(`${server_url}/explorers/creatures`,{
+          headers: {
+            'Authorization' : `Bearer ${UserInfos.access_token}`
+          }
+        });
         console.log(response);
-        if(response == 200 ){
-            creatures.value = response.data
-        }
+        // if(response == 200 ){
+        //     creatures.value = response.data
+        // }
     }catch (err){
         console.log(err);
     }
