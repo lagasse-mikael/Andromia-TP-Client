@@ -5,10 +5,22 @@
      <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="col-md-2 my-2" v-for="creature in creatures" >
-                <div class="card">
-                    <img :src="creature.asset" :alt="creature.asset" class="img-fluid"/>
-                    <h4>{{creature.name}}</h4>
+            <div class="col-md-2 my-2" v-for="creature in creatures">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <img :src="creature.asset" :alt="creature.asset" class="img-fluid"/>
+                      <h1 class="center-text">{{creature.name}}</h1>
+                      <i class="center-text mb-5"> - {{creature.affinity}} - </i>
+                    </div>  
+                    <div class="flip-card-back" >
+                      <h1 class="mb-3">Statistique</h1>
+                      <div v-for="stat in Object.keys(creature.stats)">
+                        <h3>{{stat}} : {{ creature.stats[stat] }}</h3>
+
+                      </div>
+                    </div>                    
+                  </div>
                 </div>
             </div>
           </div>
@@ -43,21 +55,85 @@ async function retrieveExplorerCreatures(){
             'Authorization' : `Bearer ${UserInfos.access_token}`
           }
         });
-        console.log(response);
-        // if(response == 200 ){
-        //     creatures.value = response.data
-        // }
+
+        if(response.status == 200 ){
+            console.log(response.data[0].stats);
+            creatures.value = response.data
+            console.log(creatures.value);
+        }
     }catch (err){
         console.log(err);
     }
 }
 
+document.querySelectorAll('.flip-card-click .flip-card-inner').forEach(function(item) {  
+    item.addEventListener('keypress', function(evt) { if (evt.keyCode == 13 || evt.keyCode == 32) { item.click(); } });
+});
 
+document.querySelectorAll('.flip-card-click').forEach(function(item) { 
+    item.addEventListener('click', function () { this.classList.toggle('flipped');  });
+});
 
 
 </script>
 
 <style lang="scss" scoped>
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+
+.center-text{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 80%; 
+}
 
 
+
+//Flip on hover source du code: https://codepen.io/JenniferWagner/pen/WNjRRJm,  Mais je l'ai modifié
+.flip-card{
+  display: inline-block;
+  border-radius: 20%;
+  background-color: transparent;
+  width: 300px;
+  height: 330px;
+  perspective: 1000px;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus .flip-card-inner,
+  .flip-card:focus-within .flip-card-inner,
+  .flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    border-radius: 6%;
+    width: 100%;
+    height: 100%;
+    // -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  .flip-card-front {
+    background-color: #111c44;
+  }
+  .flip-card-back {
+    background-color: #111c44;
+    transform: rotateY(180deg);
+  }
 </style>
