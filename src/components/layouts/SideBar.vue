@@ -22,11 +22,14 @@
     </div>
     <hr class="mt-0 horizontal dark dark-fix" />
     <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
+      <div style="text-align:center;margin:10px">
+        <i class="ni ni-money-coins text-success text-sm opacity-10"></i>
+        <span id="inoxBalance" style="font-weight:bold ;"></span>
+      </div>
       <ul class="navbar-nav">
-
         <SideBarItem url="/homePage" text="Historique d'explorations">
             <template v-slot:icon>
-              <i class="ni ni-collection text-success text-sm opacity-10"></i>
+              <i class="ni ni-world text-success text-sm opacity-10"></i>
             </template>
         </SideBarItem>
 
@@ -47,7 +50,9 @@
 </template>
 
 <script setup>
-import SideBarItem from './SideBarItem.vue';</script>
+import SideBarItem from './SideBarItem.vue';
+
+</script>
 
 <style lang="scss" scoped>
 .navbar-vertical {

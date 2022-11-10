@@ -3,6 +3,7 @@ import HomePage from '../views/pages/HomePage.vue'
 import LoginPage from '../views/pages/LoginPage.vue'
 import CreationPage from '../views/pages/CreationPage.vue'
 import CreaturePage from '../views/pages/CreaturePage.vue'
+import ElementPage from '../views/pages/ElementPage.vue'
 
 const router = createRouter({
   history: import.meta.env.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/creatures',
       name: 'creatures',
       component: CreaturePage
+    },
+    {
+      path: '/elements',
+      name: 'elements',
+      component: ElementPage
     }
   ]
 })

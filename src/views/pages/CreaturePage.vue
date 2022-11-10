@@ -1,6 +1,6 @@
 <template>
     
-  <MainLayout title="Les belles petites créatures de mon boy">
+  <MainLayout title="Mes creatures">
     <div class="py-4 container-fluid">
      <div class="row">
         <div class="col-12">
@@ -44,16 +44,13 @@ async function retrieveExplorerCreatures(){
           }
         });
         console.log(response);
-        // if(response == 200 ){
-        //     creatures.value = response.data
-        // }
+        if(response.status == 200 ){
+            creatures.value = response.data.creatures
+        }
     }catch (err){
         console.log(err);
     }
 }
-
-
-
 
 </script>
 
