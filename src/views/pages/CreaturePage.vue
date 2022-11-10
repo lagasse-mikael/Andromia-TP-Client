@@ -1,39 +1,52 @@
 <template>
-    
+
   <MainLayout title="Mes creatures">
     <div class="py-4 container-fluid">
-     <div class="row">
+      <div class="row">
         <div class="col-12">
           <div class="row">
             <div class="col-md-2 my-2" v-for="creature in creatures">
-                <div class="flip-card">
-                  <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                      <img :src="creature.asset" :alt="creature.asset" class="img-fluid"/>
-                      <h1 class="center-text">{{creature.name}}</h1>
-                      <i class="center-text mb-5"> - {{creature.affinity}} - </i>
-                    </div>  
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img  :src="creature.asset" :alt="creature.asset" class="img-fluid" />
+                    <h1 class="center-text">{{ creature.name }}</h1>
+                    <img style="width:35px;" :src="'/img/affinities/' +  creature.affinity + '.png'" alt="{{creature.affinity}}"/>
+                    <h5><i class="center-text mb-5"> - {{ creature.affinity }} - </i></h5>
+                  </div>
 
-                    <div class="flip-card-back" >
-                      <h1 class="mb-3">Statistique</h1>
-                      <div v-for="stat in Object.keys(creature.stats)">
-                        <!-- <img :src="require('../../assets/img/icons/creature/books/{{stat}}.png')" alt="{{stat}}.png"/> -->
-                        <span>
-                          <img style="width:35px;" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png"/>
-                          <span>{{stat}} : {{ creature.stats[stat] }}</span>
-                          
-                        </span>
-
+                  <div class="flip-card-back">
+                    <h1 class="mb-4">Statistiques</h1>
+                    <!-- <img :src="require('../../assets/img/icons/creature/books/{{stat}}.png')" alt="{{stat}}.png"/> -->
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-3" v-for="stat in Object.keys(creature.stats)">
+                            <img style="width:35px;" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png" /><br/>
+                            <span style="font-size: 32px;"> {{ creature.stats[stat] }}</span>
+                        </div>
                       </div>
-                    </div>                    
+                      <hr/>
+                      <div class="row mt-2" >
+                        <h4>Nombre de combat gagné</h4>
+                        <h3>50</h3>
+                        <!-- TODO: mettre le nombre réelle -->
+                      </div>
+
+                      <div class="row mt-2" >
+                        <div class="col-6" v-for="book in creature.books">
+                          <img style="width:55px;" :src="'/img/icons/creature/books/' + book + '.png'" alt="{{book}}.png" /><br/>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </MainLayout> 
+  </MainLayout>
 
 </template>
 
@@ -51,76 +64,84 @@ const server_url = import.meta.env.VITE_SERVER_URL
 const UserInfos = useUserInfosStore();
 
 onMounted(() => {
-    retrieveExplorerCreatures();
+  retrieveExplorerCreatures();
 })
 
-async function retrieveExplorerCreatures(){
-    try{
-        const response = await axios.get(`${server_url}/explorers/creatures`,{
-          headers: {
-            'Authorization' : `Bearer ${UserInfos.access_token}`
-          }
-        });
-        console.log(response);
-        if(response.status == 200 ){
-            creatures.value = response.data.creatures
-        }
-    }catch (err){
-        console.log(err);
+async function retrieveExplorerCreatures() {
+  try {
+    const response = await axios.get(`${server_url}/explorers/creatures`, {
+      headers: {
+        'Authorization': `Bearer ${UserInfos.access_token}`
+      }
+    });
+    console.log(response);
+    if (response.status == 200) {
+      creatures.value = response.data.creatures
     }
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 </script>
 
 <style lang="scss" scoped>
 .center {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
 }
-.center-text{
+
+.center-text {
   text-align: center;
   vertical-align: middle;
-  line-height: 80%; 
+  line-height: 80%;
 }
+
 //Flip on hover source du code: https://codepen.io/JenniferWagner/pen/WNjRRJm,  Mais je l'ai modifié
-.flip-card{
+.flip-card {
   display: inline-block;
   border-radius: 20%;
   background-color: transparent;
   width: 300px;
-  height: 330px;
+  height: 350px;
   perspective: 1000px;
-  }
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  .flip-card:hover .flip-card-inner,
-  .flip-card:focus .flip-card-inner,
-  .flip-card:focus-within .flip-card-inner,
-  .flip-card:active .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  .flip-card-front, .flip-card-back {
-    position: absolute;
-    border-radius: 6%;
-    width: 100%;
-    height: 100%;
-    // -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-  }
-  .flip-card-front {
-    background-color: #111c44;
-  }
-  .flip-card-back {
-    background-color: #111c44;
-    transform: rotateY(180deg);
-  }
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card:focus .flip-card-inner,
+.flip-card:focus-within .flip-card-inner,
+.flip-card:active .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  border-radius: 6%;
+  width: 100%;
+  height: 100%;
+  // -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #111c44;
+}
+
+.flip-card-back {
+  background-color: #111c44;
+  transform: rotateY(180deg);
+}
 </style>

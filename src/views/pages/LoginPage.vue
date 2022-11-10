@@ -6,12 +6,12 @@
 				<h1>Bienvenue sur <span id="title">Andromia TP</span></h1>
 				<i style="font-size:1.125em">parce que fight des créatures, c'est <b>Andromia en criss</b></i>
 			</article>
-			<article class="col-6 offset-3">
-				<form class="mx-2" @submit="onSubmit">
+			<article class="col-6 offset-3 d-flex">
+				<form class="mx-2 form " @submit="onSubmit">
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
 						<input id="usernameInput" v-model="username" type="text" class="form-control">
-						<span class="erreurForm"> {{errUsername}}</span>
+						<div class="erreurForm"> {{errUsername}}</div>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label">Mot de passe</label>
@@ -62,6 +62,7 @@ const onSubmit = handleSubmit(values => {
 
 const { value: username, errorMessage: errUsername } = useField('user.username', yup.string().required("Votre nom est requis")
 	.min(5, "Votre nom d'utilisateur doit contenir au moins 5 caractères."));
+
 const { value: password, errorMessage: errMdp } = useField('user.password', yup.string().required("Votre mot de passe est requis")
 	.min(2, "Votre mot de passe doit avoir au moins 2 caracteres."));
 
@@ -96,11 +97,20 @@ async function login(user) {
 </script>
 
 <style lang="scss" scoped>
+.form{
+	min-width: 400px;
+	justify-content: center;
+}
 .center {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	padding: 10px;
+}
+
+.erreurForm{
+	font-size: 0.81em;
+
 }
 </style>
