@@ -5,10 +5,22 @@
      <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="col-md-2 my-2" v-for="creature in creatures" >
-                <div class="card">
-                    <img :src="creature.asset" :alt="creature.asset" class="img-fluid"/>
-                    <h4>{{creature.name}}</h4>
+            <div class="col-md-2 my-2" v-for="creature in creatures">
+                <div class="flip-card">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                      <img :src="creature.asset" :alt="creature.asset" class="img-fluid"/>
+                      <h1 class="center-text">{{creature.name}}</h1>
+                      <i class="center-text mb-5"> - {{creature.affinity}} - </i>
+                    </div>  
+                    <div class="flip-card-back" >
+                      <h1 class="mb-3">Statistique</h1>
+                      <div v-for="stat in Object.keys(creature.stats)">
+                        <h3>{{stat}} : {{ creature.stats[stat] }}</h3>
+
+                      </div>
+                    </div>                    
+                  </div>
                 </div>
             </div>
           </div>
@@ -44,17 +56,28 @@ async function retrieveExplorerCreatures(){
           }
         });
         console.log(response);
-        if(response.status == 200 ){
-            creatures.value = response.data.creatures
-        }
+        // if(response == 200 ){
+        //     creatures.value = response.data
+        // }
     }catch (err){
         console.log(err);
     }
 }
 
+
+
+
 </script>
 
 <style lang="scss" scoped>
 
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    border-radius: 6%;
+    width: 100%;
+    height: 100%;
+    // -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
 
 </style>
