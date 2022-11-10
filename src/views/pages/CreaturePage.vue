@@ -13,11 +13,16 @@
                       <h1 class="center-text">{{creature.name}}</h1>
                       <i class="center-text mb-5"> - {{creature.affinity}} - </i>
                     </div>  
-                    
+
                     <div class="flip-card-back" >
                       <h1 class="mb-3">Statistique</h1>
                       <div v-for="stat in Object.keys(creature.stats)">
-                        <h3>{{stat}} : {{ creature.stats[stat] }}</h3>
+                        <!-- <img :src="require('../../assets/img/icons/creature/books/{{stat}}.png')" alt="{{stat}}.png"/> -->
+                        <span>
+                          <img style="28px" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png"/>
+                          <span>{{stat}} : {{ creature.stats[stat] }}</span>
+                          
+                        </span>
 
                       </div>
                     </div>                    
@@ -64,9 +69,6 @@ async function retrieveExplorerCreatures(){
         console.log(err);
     }
 }
-
-
-
 
 </script>
 
