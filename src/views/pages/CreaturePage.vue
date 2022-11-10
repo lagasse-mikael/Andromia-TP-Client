@@ -57,9 +57,9 @@ async function retrieveExplorerCreatures(){
           }
         });
         console.log(response);
-        // if(response == 200 ){
-        //     creatures.value = response.data
-        // }
+        if(response.status == 200 ){
+            creatures.value = response.data.creatures
+        }
     }catch (err){
         console.log(err);
     }
@@ -71,7 +71,41 @@ async function retrieveExplorerCreatures(){
 </script>
 
 <style lang="scss" scoped>
-
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+.center-text{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 80%; 
+}
+//Flip on hover source du code: https://codepen.io/JenniferWagner/pen/WNjRRJm,  Mais je l'ai modifié
+.flip-card{
+  display: inline-block;
+  border-radius: 20%;
+  background-color: transparent;
+  width: 300px;
+  height: 330px;
+  perspective: 1000px;
+  }
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  .flip-card:hover .flip-card-inner,
+  .flip-card:focus .flip-card-inner,
+  .flip-card:focus-within .flip-card-inner,
+  .flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+  }
   .flip-card-front, .flip-card-back {
     position: absolute;
     border-radius: 6%;
@@ -80,5 +114,11 @@ async function retrieveExplorerCreatures(){
     // -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
   }
-
+  .flip-card-front {
+    background-color: #111c44;
+  }
+  .flip-card-back {
+    background-color: #111c44;
+    transform: rotateY(180deg);
+  }
 </style>
