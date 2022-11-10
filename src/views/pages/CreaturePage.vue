@@ -13,6 +13,7 @@
                       <h1 class="center-text">{{creature.name}}</h1>
                       <i class="center-text mb-5"> - {{creature.affinity}} - </i>
                     </div>  
+                    
                     <div class="flip-card-back" >
                       <h1 class="mb-3">Statistique</h1>
                       <div v-for="stat in Object.keys(creature.stats)">
