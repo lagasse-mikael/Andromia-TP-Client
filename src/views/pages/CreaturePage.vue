@@ -19,7 +19,7 @@
                       <div v-for="stat in Object.keys(creature.stats)">
                         <!-- <img :src="require('../../assets/img/icons/creature/books/{{stat}}.png')" alt="{{stat}}.png"/> -->
                         <span>
-                          <img style="28px" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png"/>
+                          <img style="width:35px;" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png"/>
                           <span>{{stat}} : {{ creature.stats[stat] }}</span>
                           
                         </span>
