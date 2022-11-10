@@ -10,8 +10,7 @@
             <ul class="navbar-nav justify-content-end ms-md-auto">
                 <li class="nav-item d-flex align-items-center">
                 <a href="#modLogin" class="px-0 nav-link font-weight-bold text-white" data-bs-toggle="modal" data-bs-target="#modLogin">
-                    <i class="ni ni-bold-right me-sm-2" aria-hidden="true"></i>
-                    <span class="d-sm-inline d-none">Deconnexion</span>
+                    <button class="d-sm-inline d-none btn btn-light" @click="disconnect()" >Deconnexion</button>
                 </a>
                 </li>
             </ul>
@@ -21,12 +20,23 @@
 </template>
 
 <script setup>
+import router from '../../router';
+import { useUserInfosStore } from '../../stores/userInfos';
+
+const userInfos = useUserInfosStore()
+
 const props = defineProps({
     title:{
         type: String,
         required:true
     }
 })
+
+function disconnect(){
+    userInfos.access_token = ""
+    userInfos.refresh_token = "" 
+    router.push("/")
+}
 
 </script>
 

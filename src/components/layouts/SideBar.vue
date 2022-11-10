@@ -11,7 +11,7 @@
         aria-hidden="true"
         id="iconSidenav"
       ></i>
-      <RouterLink class="navbar-brand" to="/">
+      <RouterLink class="navbar-brand" to="/homePage">
         <img
           src="@/assets/img/andromia-logo.png"
           class="h-100"
