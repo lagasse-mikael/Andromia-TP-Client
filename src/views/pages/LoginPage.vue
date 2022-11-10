@@ -24,83 +24,83 @@
 				</form>
 			</article>
 			<article class="my-2 text-center">
-				
+
 			</article>
 		</div>
 	</div>
 </template>
 
 <script setup>
-	//Vee-Validate pour les champs du form
-	import { useField, useForm } from 'vee-validate';
-	import * as yup from 'yup';
-	import { inject, onMounted, ref } from 'vue';
-	import router from '../../router/index.js';
-	import { useToast } from "vue-toastification";
-	import MainLayout from '../layouts/MainLayout.vue';
-	import axios from 'axios';
-	import userInfosStore from '../../stores/userInfos.js';
+//Vee-Validate pour les champs du form
+import { useField, useForm } from 'vee-validate';
+import * as yup from 'yup';
+import { inject, onMounted, ref } from 'vue';
+import router from '../../router/index.js';
+import { useToast } from "vue-toastification";
+import MainLayout from '../layouts/MainLayout.vue';
+import axios from 'axios';
+import { useUserInfosStore } from '../../stores/userInfos.js';
 
-	const userInfosStore = useUserInfosStore
-	const toast = useToast();
-	const { handleSubmit, meta } = useForm();
+const userInfosStore = useUserInfosStore();
+const toast = useToast();
+const { handleSubmit, meta } = useForm();
 
-	const server_url = import.meta.env.VITE_SERVER_URL
-	
-	let isBackSpace = ref(false);
-	let input;
-	
-	function onInvalidSubmit({ values, errors, results }) {
+const server_url = import.meta.env.VITE_SERVER_URL
+
+let isBackSpace = ref(false);
+let input;
+
+function onInvalidSubmit({ values, errors, results }) {
 	console.log(values); // current form values
 	console.log(errors); // a map of field names and their first error message
 	console.log(results); // a detailed map of field names and their validation results
-	}
+}
 
-	const onSubmit = handleSubmit(values => {
-		login(values.user);
-	}, onInvalidSubmit);
+const onSubmit = handleSubmit(values => {
+	login(values.user);
+}, onInvalidSubmit);
 
-	const { value: username, errorMessage: errUsername } = useField('user.username', yup.string().required("Votre nom est requis")
-	.min(5, "Votre nom d'utilisateur doit contenir au moins 5 caractères.")); 
-	const { value: password, errorMessage: errMdp } = useField('user.password', yup.string().required("Votre mot de passe est requis")
-	.min(2, "Votre mot de passe doit avoir au moins 2 caracteres.")); 
+const { value: username, errorMessage: errUsername } = useField('user.username', yup.string().required("Votre nom est requis")
+	.min(5, "Votre nom d'utilisateur doit contenir au moins 5 caractères."));
+const { value: password, errorMessage: errMdp } = useField('user.password', yup.string().required("Votre mot de passe est requis")
+	.min(2, "Votre mot de passe doit avoir au moins 2 caracteres."));
 
-	async function login(user) {
-		try {
-			const res = await axios.post(`${server_url}/explorers/login`, user);
-			if(res.status === 200) {
-				userInfosStore.access_token = res.data.access_token
-				userInfosStore.refresh_token = res.data.refresh_token
-				console.log(userInfosStore);
-                router.push('/homePage');
-			}
-		} catch (err) {
-			toast.error("Votre nom d'utilisateur ou votre mot de passe est incorrect", {
-				position: "bottom-center",
-				timeout: 7000,
-				closeOnClick: true,
-				pauseOnFocusLoss: false,
-				pauseOnHover: true,
-				draggable: true,
-				draggablePercent: 0.6,
-				showCloseButtonOnHover: false,
-				hideProgressBar: true,
-				closeButton: "button",
-				icon: true,
-				rtl: false
-			})
-			console.log(err);
+async function login(user) {
+	try {
+		const res = await axios.post(`${server_url}/explorers/login`, user);
+		if (res.status === 200) {
+			userInfosStore.access_token = res.data.access_token
+			userInfosStore.refresh_token = res.data.refresh_token
+			console.log(userInfosStore);
+			router.push('/homePage');
 		}
+	} catch (err) {
+		toast.error("Votre nom d'utilisateur ou votre mot de passe est incorrect", {
+			position: "bottom-center",
+			timeout: 7000,
+			closeOnClick: true,
+			pauseOnFocusLoss: false,
+			pauseOnHover: true,
+			draggable: true,
+			draggablePercent: 0.6,
+			showCloseButtonOnHover: false,
+			hideProgressBar: true,
+			closeButton: "button",
+			icon: true,
+			rtl: false
+		})
+		console.log(err);
 	}
+}
 
 </script>
 
 <style lang="scss" scoped>
-  .center {
+.center {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	padding: 10px;
-  }
+}
 </style>
