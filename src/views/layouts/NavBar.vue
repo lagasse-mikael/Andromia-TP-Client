@@ -4,7 +4,7 @@
             <nav aria-label="breadcrumb">
             <ol class="px-0 pt-1 pb-0 mb-0 bg-transparent breadcrumb me-sm-6 text-white">
             </ol>
-            <h6 class="mb-0 font-weight-bolder text-white">{{title}}</h6>
+            <h1 class="mb-0 font-weight-bolder text-white">{{title}}</h1>
             </nav>
             <div class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4 me-sm-4" id="navbar">
             <ul class="navbar-nav justify-content-end ms-md-auto">
@@ -22,9 +22,10 @@
 <script setup>
 import router from '../../router';
 import { useUserInfosStore } from '../../stores/userInfos';
+import {useToast} from 'vue-toastification';
 
 const userInfos = useUserInfosStore()
-
+const toast = useToast();
 const props = defineProps({
     title:{
         type: String,
@@ -36,6 +37,22 @@ function disconnect(){
     userInfos.access_token = ""
     userInfos.refresh_token = "" 
     router.push("/")
+
+    toast.success("Vous êtes déconnecté, à la prochaine !" , {
+				position: "bottom-center",
+				timeout: 7000,
+				closeOnClick: true,
+				pauseOnFocusLoss: false,
+				pauseOnHover: true,
+				draggable: true,
+				draggablePercent: 0.6,
+				showCloseButtonOnHover: false,
+				hideProgressBar: true,
+				closeButton: "button",
+				icon: true,
+				rtl: false
+			});
+    
 }
 
 </script>

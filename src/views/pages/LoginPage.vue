@@ -11,12 +11,12 @@
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
 						<input id="usernameInput" v-model="username" type="text" class="form-control">
-						<div class="erreurForm"> {{errUsername}}</div>
+						<div class="erreurForm"> {{ errUsername }}</div>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label">Mot de passe</label>
 						<input v-model="password" type="password" class="form-control" id="exampleInputPassword1">
-						<span class="erreurForm"> {{errMdp}}</span>
+						<span class="erreurForm"> {{ errMdp }}</span>
 					</div>
 					<div class="text-center">
 						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary">Connexion</button>
@@ -40,6 +40,7 @@ import { useToast } from "vue-toastification";
 import MainLayout from '../layouts/MainLayout.vue';
 import axios from 'axios';
 import { useUserInfosStore } from '../../stores/userInfos.js';
+
 
 const userInfosStore = useUserInfosStore();
 const toast = useToast();
@@ -72,8 +73,25 @@ async function login(user) {
 		if (res.status === 200) {
 			userInfosStore.access_token = res.data.tokens.access_token
 			userInfosStore.refresh_token = res.data.tokens.refresh_token
-			
-			router.push('/homePage');
+			router.push('/homePage')
+
+			toast.success("Bienvenue sur Andromia " + res.data.username + " !" , {
+				position: "bottom-center",
+				timeout: 7000,
+				closeOnClick: true,
+				pauseOnFocusLoss: false,
+				pauseOnHover: true,
+				draggable: true,
+				draggablePercent: 0.6,
+				showCloseButtonOnHover: false,
+				hideProgressBar: true,
+				closeButton: "button",
+				icon: true,
+				rtl: false
+			});
+
+
+
 		}
 	} catch (err) {
 		toast.error("Votre nom d'utilisateur ou votre mot de passe est incorrect", {
@@ -97,10 +115,11 @@ async function login(user) {
 </script>
 
 <style lang="scss" scoped>
-.form{
+.form {
 	min-width: 400px;
 	justify-content: center;
 }
+
 .center {
 	position: absolute;
 	left: 50%;
@@ -109,7 +128,7 @@ async function login(user) {
 	padding: 10px;
 }
 
-.erreurForm{
+.erreurForm {
 	font-size: 0.81em;
 
 }
