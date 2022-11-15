@@ -1,46 +1,12 @@
 <template>
 
-  <MainLayout title="Mes creatures">
+  <MainLayout :title="'salut' + userName">
     <div class="py-4 container-fluid">
       <div class="row">
         <div class="col-12">
           <div class="row">
             <div class="col-md-2 my-2" v-for="creature in creatures">
-              <div class="flip-card">
-                <div class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img  :src="creature.asset" :alt="creature.asset" class="img-fluid" />
-                    <h1 class="center-text">{{ creature.name }}</h1>
-                    <img style="width:35px;" :src="'/img/affinities/' +  creature.affinity + '.png'" alt="{{creature.affinity}}"/>
-                    <h5><i class="center-text mb-5"> - {{ creature.affinity }} - </i></h5>
-                  </div>
-
-                  <div class="flip-card-back">
-                    <h1 class="mb-4">Statistiques</h1>
-                    <!-- <img :src="require('../../assets/img/icons/creature/books/{{stat}}.png')" alt="{{stat}}.png"/> -->
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-3" v-for="stat in Object.keys(creature.stats)">
-                            <img style="width:35px;" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png" /><br/>
-                            <span style="font-size: 32px;"> {{ creature.stats[stat] }}</span>
-                        </div>
-                      </div>
-                      <hr/>
-                      <div class="row mt-2" >
-                        <h4>Nombre de combat gagné</h4>
-                        <h3>50</h3>
-                        <!-- TODO: mettre le nombre réelle -->
-                      </div>
-
-                      <div class="row mt-2" >
-                        <div class="col-6" v-for="book in creature.books">
-                          <img style="width:55px;" :src="'/img/icons/creature/books/' + book + '.png'" alt="{{book}}.png" /><br/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CreatureCard :creature="creature"/>
             </div>
           </div>
         </div>
@@ -56,15 +22,23 @@ import axios from 'axios';
 import MainLayout from '../layouts/MainLayout.vue';
 import NavBar from "../layouts/NavBar.vue";
 import { useUserInfosStore } from '../../stores/userInfos';
+import CreatureCard from '../../components/CreatureCard.vue';
 
 // const axios = inject("axios");
 const creatures = ref([])
 const server_url = import.meta.env.VITE_SERVER_URL
 
 const UserInfos = useUserInfosStore();
+let userName = "";
 
 onMounted(() => {
   retrieveExplorerCreatures();
+  userName = UserInfos.userName;
+  console.log(userName);
+
+
+
+
 })
 
 async function retrieveExplorerCreatures() {
@@ -74,7 +48,6 @@ async function retrieveExplorerCreatures() {
         'Authorization': `Bearer ${UserInfos.access_token}`
       }
     });
-    console.log(response);
     if (response.status == 200) {
       creatures.value = response.data.creatures
     }
