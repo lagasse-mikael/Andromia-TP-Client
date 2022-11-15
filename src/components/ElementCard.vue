@@ -1,10 +1,10 @@
 <template>
     <div class="card">
         <img style="margin: auto 0px;"
-            v-bind:src="'https://assets.andromia.science/elements/' + element.element + '.png'"
+            v-bind:src="element.image"
             v-bind:title="element.element" />
         <h2>{{element.element}}</h2>
-        <h3>x {{element.quantity}}</h3>
+        <h3>x {{element.quantity ?? 0}}</h3>
     </div>
 </template>
 

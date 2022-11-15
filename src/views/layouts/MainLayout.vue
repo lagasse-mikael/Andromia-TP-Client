@@ -36,7 +36,7 @@ onMounted(() => {
       'Authorization': `Bearer ${userInfos.access_token}`
     }
   }).then(response => {
-    userVault.value = response.data.vault
+    userVault.value = response.data
     document.getElementById('inoxBalance').innerText = " Inox : " + userVault.value.inox
   })
 })

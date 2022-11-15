@@ -5,8 +5,8 @@
       <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="col-md-2 my-2" v-for="element in vault.elements">
-              <ElementCard :element="element"/>
+            <div class="col-md-2 my-2" v-for="element in elements">
+              <ElementCard :element="element" />
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@ import MainLayout from '../layouts/MainLayout.vue';
 import { useUserInfosStore } from '../../stores/userInfos';
 import ElementCard from '../../components/ElementCard.vue';
 
-const vault = ref({})
+let elements = ref({})
 const server_url = import.meta.env.VITE_SERVER_URL
 
 const UserInfos = useUserInfosStore();
@@ -34,14 +34,38 @@ onMounted(() => {
 
 async function retrieveExplorerElements() {
   try {
-    const response = await axios.get(`${server_url}/explorers/vault`, {
+    const responseElements = await axios.get(`${server_url}/elements/`, {
       headers: {
         'Authorization': `Bearer ${UserInfos.access_token}`
       }
     });
-    console.log(response);
-    if (response.status == 200) {
-      vault.value = response.data.vault
+
+    if (responseElements.status == 200) {
+      elements.value = responseElements.data
+
+      const userVaultResponse = await axios.get(`${server_url}/explorers/vault`, {
+        headers: {
+          'Authorization': `Bearer ${UserInfos.access_token}`
+        }
+      });
+
+      if(userVaultResponse.status == 200){
+        const userElements = userVaultResponse.data.elements
+
+        elements.value = elements.value.map(el => {
+          el.quantity = 0
+          userElements.forEach(elementUser => {
+            if(el.element == elementUser.element) {
+              el.quantity = elementUser.quantity
+            }
+          })
+          return el
+        })
+
+        elements.value = elements.value.sort((x,y) => -(x.quantity - y.quantity))
+      }
+
+
     }
   } catch (err) {
     console.log(err);
@@ -51,5 +75,4 @@ async function retrieveExplorerElements() {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
