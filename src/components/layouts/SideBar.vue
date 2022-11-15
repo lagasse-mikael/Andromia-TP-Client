@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
       <div style="text-align:center;margin:10px">
         <i class="ni ni-money-coins text-success text-sm opacity-10"></i>
-        <span id="inoxBalance" style="font-weight:bold ;"></span>
+        <span id="inoxBalance" style="font-weight:bold ;"> Inox : --</span>
       </div>
       <ul class="navbar-nav">
         <SideBarItem url="/homePage" text="Historique d'explorations">
