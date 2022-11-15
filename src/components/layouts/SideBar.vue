@@ -23,8 +23,11 @@
     <hr class="mt-0 horizontal dark dark-fix" />
     <div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
       <div style="text-align:center;margin:10px">
-        <i class="ni ni-money-coins text-success text-sm opacity-10"></i>
-        <span id="inoxBalance" style="font-weight:bold ;"> Inox : --</span>
+        <img 
+          src="@/assets/img/icons/inox.png"
+          alt="inoxImg"
+          class="imgIcon"/>
+        <span id="inoxBalance" style="font-weight:bold; margin-left: -20px;"> Inox : --</span>
       </div>
       <ul class="navbar-nav">
         <SideBarItem url="/homePage" text="Historique d'explorations">
@@ -73,4 +76,10 @@ import SideBarItem from './SideBarItem.vue';
 .dark-fix {
   color: #111c44;
 }
+
+.imgIcon{
+  height: 70px;
+  width: 70px;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
 
-  <MainLayout :title="'salut' + userName">
+  <MainLayout :title="'Les créatures à ' + UserInfos.userName">
     <div class="py-4 container-fluid">
       <div class="row">
         <div class="col-12">
@@ -29,16 +29,9 @@ const creatures = ref([])
 const server_url = import.meta.env.VITE_SERVER_URL
 
 const UserInfos = useUserInfosStore();
-let userName = "";
 
 onMounted(() => {
   retrieveExplorerCreatures();
-  userName = UserInfos.userName;
-  console.log(userName);
-
-
-
-
 })
 
 async function retrieveExplorerCreatures() {
