@@ -50,7 +50,7 @@ async function retrieveExplorerElements() {
       });
 
       if(userVaultResponse.status == 200){
-        const userElements = userVaultResponse.data.vault.elements
+        const userElements = userVaultResponse.data.elements
 
         elements.value = elements.value.map(el => {
           el.quantity = 0
