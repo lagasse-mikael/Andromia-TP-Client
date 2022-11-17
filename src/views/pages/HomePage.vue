@@ -1,12 +1,27 @@
 <template>
 
-  <MainLayout title="Historique des explorations">
+  <MainLayout :title="`Historique d'explorations de ` + UserInfos.userName ">
     <div class="py-4 container-fluid">
       <div class="row">
         <div class="card col-3" v-for="exploration in explorations">
           <i>{{ exploration.explorationDate.split('T')[0] }}</i>
           <h1 style="margin-top:-10px">{{ exploration.destination }}</h1>
-          <h3>Affinity : {{ exploration.affinity }}</h3>
+          <h3 class="badge bg-gradient px-3 me-auto " 
+            :class="[exploration.affinity == 'energy' ? 'bg-warning text-dark': 
+                     exploration.affinity == 'air' ? 'bg-light text-dark' : 
+                     exploration.affinity == 'darkness' ? 'bg-dark text-white' :
+                     exploration.affinity == 'earth' ? 'bg-brown' : 
+                     exploration.affinity == 'energy' ? 'bg-orange' :
+                     exploration.affinity == 'fire' ? 'bg-danger' :  
+                     exploration.affinity == 'life' ? 'bg-success': 
+                     exploration.affinity == 'light' ? 'bg-warning text-dark':
+                     exploration.affinity == 'logic' ? 'bg-warning text-dark':  
+                     exploration.affinity == 'music' ? 'bg-pink': 
+                     exploration.affinity == 'space' ? 'bg-primary':
+                     exploration.affinity == 'toxic' ? 'bg-success':  
+                     exploration.affinity == 'water' ? 'bg-info': 'bg-secondary'                     
+                     
+                     ]">Affinity : {{ exploration.affinity }}</h3>
           <h2>Loot :</h2>
           <div class="container">
             <div class="row">
@@ -61,5 +76,16 @@ async function retrieveExplorerExplorations() {
 </script>
 
 <style lang="scss" scoped>
+.bg-orange{
+  background-color: #fd7e14;
+}
+
+.bg-brown{
+background-color:#964B00;
+}
+
+.bg-pink{
+  background-color:#d63384;
+}
 
 </style>

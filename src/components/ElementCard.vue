@@ -1,9 +1,9 @@
 <template>
     <div class="card">
-        <img style="margin: auto 0px;"
-
+        <img style="margin: auto 0px; max-width: 7em;"
             v-bind:src="element.image"
-            v-bind:title="element.element" />
+            v-bind:title="element.element"
+            class="img-fluid mx-auto" />
         <div class="center-text">
             <h2>{{element.element}}</h2>
             <h3>x {{element.quantity ?? 0}}</h3>

@@ -1,6 +1,6 @@
 <template>
 
-  <MainLayout title="Mes elements">
+  <MainLayout :title="'Les éléments de ' + UserInfos.userName ">
     <div class="py-4 container-fluid">
       <div class="row">
         <div class="col-12">

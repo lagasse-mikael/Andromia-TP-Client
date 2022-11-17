@@ -2,10 +2,11 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-        <img :src="creature.asset" :alt="creature.asset" class="img-fluid" />
+        <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto" />
         <h1 class="center-text">{{ creature.name }}</h1>
         <img
-          style="width: 35px"
+          style="width: 2em"
+          class="img-fluid mx-auto"
           :src="'/img/affinities/' + creature.affinity + '.png'"
           alt="{{creature.affinity}}" />
         <h5>
@@ -30,7 +31,7 @@
           <hr />
           <div class="row mt-2">
             <h4>Nombre de combat gagné</h4>
-            <h3>50</h3>
+            <h3>{{creature.stats.nbCombatGagne}}</h3>
             <!-- TODO: mettre le nombre réelle -->
           </div>
 

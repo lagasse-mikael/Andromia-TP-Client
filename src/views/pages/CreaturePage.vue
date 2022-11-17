@@ -110,4 +110,5 @@ async function retrieveExplorerCreatures() {
   background-color: #111c44;
   transform: rotateY(180deg);
 }
+
 </style>
