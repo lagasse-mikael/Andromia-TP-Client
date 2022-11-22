@@ -42,7 +42,7 @@ async function retrieveExplorerCreatures() {
       }
     });
     if (response.status == 200) {
-      creatures.value = response.data.creatures
+      creatures.value = response.data
     }
   } catch (err) {
     console.log(err);
