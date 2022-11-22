@@ -20,9 +20,10 @@
     <h2>Loot :</h2>
     <div class="container">
     <div class="row">
-        <span v-for="element in exploration.vault.elements" class="col-4 text-bold"><img style="height:45px"
-            v-bind:src="'https://assets.andromia.science/elements/' + element.element + '.png'"
-            v-bind:title="element.element" />x {{ element.quantity }}</span>
+        <span v-for="element in exploration.vault.elements" class="col-4 text-bold">
+            <img style="height:45px" v-bind:src="'https://assets.andromia.science/elements/' + element.element + '.png'" 
+            v-bind:title="element.element" />
+            <h5>x {{ element.quantity }}</h5> </span>
     </div>
     <div class="row mt-2">
         <h4>+ <span style="color:yellow ;">{{ exploration.vault.inox }} inox</span> !</h4>
@@ -45,7 +46,22 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .card-size{
+
     width: auto;
     height: auto;
 }
+
+.bg-orange{
+  background-color: #fd7e14;
+}
+
+.bg-brown{
+background-color:#964B00;
+}
+
+.bg-pink{
+  background-color:#d63384;
+}
+
+
 </style>

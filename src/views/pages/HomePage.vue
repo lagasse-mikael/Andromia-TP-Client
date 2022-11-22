@@ -2,7 +2,7 @@
   <MainLayout :title="`Historique d'explorations de ` + UserInfos.userName ">
     <div class="px-4 container-fluid">
       <div class="row">
-        <div class="card col-3 m-2" v-for="exploration in explorations">
+        <div class="card col-3 m-2 card-size" v-for="exploration in explorations">
             <ExplorationCard :exploration="exploration" />
         </div>
       </div>
@@ -50,16 +50,11 @@ async function retrieveExplorerExplorations() {
 </script>
 
 <style lang="scss" scoped>
-.bg-orange{
-  background-color: #fd7e14;
-}
 
-.bg-brown{
-background-color:#964B00;
-}
-
-.bg-pink{
-  background-color:#d63384;
+.card-size{
+  min-width: 150px;
+  width: 350px;
+  height: 500px;
 }
 
 </style>
