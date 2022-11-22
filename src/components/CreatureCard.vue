@@ -2,7 +2,7 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-        <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto" />
+        <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
         <h1 class="center-text">{{ creature.name }}</h1>
         <img
           style="width: 2em"
@@ -10,7 +10,7 @@
           :src="'/img/affinities/' + creature.affinity + '.png'"
           alt="{{creature.affinity}}" />
         <h5>
-          <i class="center-text mb-5"> - {{ creature.affinity }} - </i>
+          <i class="center-text"> - {{ creature.affinity }} - </i>
         </h5>
       </div>
 
@@ -61,6 +61,12 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+
+.imgSize{
+  width: 230px;
+  height: auto;
+}
+
 .center {
   position: absolute;
   left: 50%;
@@ -81,7 +87,7 @@ const props = defineProps({
   border-radius: 20%;
   background-color: transparent;
   width: 300px;
-  height: 350px;
+  height: 380px;
   perspective: 1000px;
 }
 

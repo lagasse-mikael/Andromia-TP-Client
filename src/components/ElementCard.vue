@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <img style="margin: auto 0px; max-width: 7em;"
+        <img style="max-width: 7em;"
             v-bind:src="element.image"
             v-bind:title="element.element"
             class="img-fluid mx-auto" />

@@ -1,38 +1,9 @@
 <template>
-
   <MainLayout :title="`Historique d'explorations de ` + UserInfos.userName ">
-    <div class="py-4 container-fluid">
+    <div class="px-4 container-fluid">
       <div class="row">
-        <div class="card col-3" v-for="exploration in explorations">
-          <i>{{ exploration.explorationDate.split('T')[0] }}</i>
-          <h1 style="margin-top:-10px">{{ exploration.destination }}</h1>
-          <h3 class="badge bg-gradient px-3 me-auto " 
-            :class="[exploration.affinity == 'energy' ? 'bg-warning text-dark': 
-                     exploration.affinity == 'air' ? 'bg-light text-dark' : 
-                     exploration.affinity == 'darkness' ? 'bg-dark text-white' :
-                     exploration.affinity == 'earth' ? 'bg-brown' : 
-                     exploration.affinity == 'energy' ? 'bg-orange' :
-                     exploration.affinity == 'fire' ? 'bg-danger' :  
-                     exploration.affinity == 'life' ? 'bg-success': 
-                     exploration.affinity == 'light' ? 'bg-warning text-dark':
-                     exploration.affinity == 'logic' ? 'bg-warning text-dark':  
-                     exploration.affinity == 'music' ? 'bg-pink': 
-                     exploration.affinity == 'space' ? 'bg-primary':
-                     exploration.affinity == 'toxic' ? 'bg-success':  
-                     exploration.affinity == 'water' ? 'bg-info': 'bg-secondary'                     
-                     
-                     ]">Affinity : {{ exploration.affinity }}</h3>
-          <h2>Loot :</h2>
-          <div class="container">
-            <div class="row">
-              <span v-for="element in exploration.vault.elements" class="col-4 text-bold"><img style="height:45px"
-                  v-bind:src="'https://assets.andromia.science/elements/' + element.element + '.png'"
-                  v-bind:title="element.element" />x {{ element.quantity }}</span>
-            </div>
-            <div class="row mt-2">
-              <h4>+ <span style="color:yellow ;">{{ exploration.vault.inox }} inox</span> !</h4>
-            </div>
-          </div>
+        <div class="card col-3 m-2" v-for="exploration in explorations">
+            <ExplorationCard :exploration="exploration" />
         </div>
       </div>
     </div>
@@ -47,6 +18,7 @@ import { useUserInfosStore } from '../../stores/userInfos';
 import MainLayout from '../layouts/MainLayout.vue';
 import axios from 'axios';
 import { useToast } from "vue-toastification";
+import ExplorationCard from "../../components/ExplorationCard.vue";
 
 const explorations = ref([])
 const server_url = import.meta.env.VITE_SERVER_URL
@@ -55,6 +27,7 @@ const UserInfos = useUserInfosStore();
 
 onMounted(() => {
   retrieveExplorerExplorations();
+  
 })
 
 
@@ -66,7 +39,8 @@ async function retrieveExplorerExplorations() {
       }
     });
     if (response.status == 200) {
-      explorations.value = response.data.explorations
+      console.log(response);
+      explorations.value = response.data
     }
   } catch (err) {
     console.log(err);
