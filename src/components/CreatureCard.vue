@@ -86,7 +86,7 @@ const props = defineProps({
   display: inline-block;
   border-radius: 20%;
   background-color: transparent;
-  width: 300px;
+  width: 310px;
   height: 380px;
   perspective: 1000px;
 }
