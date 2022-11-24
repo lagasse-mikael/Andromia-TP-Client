@@ -21,10 +21,13 @@
 					<div class="text-center">
 						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary">Connexion</button>
 					</div>
-				</form>
-			</article>
-			<article class="my-2 text-center">
 
+					<div class="text-center m-3">
+						<RouterLink to="/CreationPage" class="text-center m-3">
+							<i> Vous n'avez pas de compte ?</i>
+						</RouterLink>
+					</div>
+				</form>
 			</article>
 		</div>
 	</div>
@@ -111,6 +114,10 @@ async function login(user) {
 		})
 		console.log(err);
 	}
+}
+
+function creerCompte(){
+	router.push("/CreationPage")
 }
 
 </script>

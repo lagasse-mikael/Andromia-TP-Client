@@ -95,7 +95,7 @@ async function createUser(user) {
     if (res.status === 201) {
       console.log("User created !");
       console.log(res);
-      router.push('/profil');
+      router.push('/');
     }
   } catch (err) {
     console.log(err);
