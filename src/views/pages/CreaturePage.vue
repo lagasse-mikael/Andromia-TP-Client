@@ -1,6 +1,6 @@
 <template>
   <MainLayout :title="'Les créatures à ' + UserInfos.userName">
-    <div class="py-4 container-fluid row">
+    <div class="py-4 row">
       <div class="col-md-2 col-sm-6 col-6 mx-4" v-for="creature in creatures">
         <CreatureCard :creature="creature" />
       </div>
