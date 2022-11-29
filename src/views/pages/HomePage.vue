@@ -58,7 +58,7 @@ async function retrieveExplorerExplorations() {
 .card-size{
   min-width: 150px;
   width: 350px;
-  height: 500px;
+  height: 550px;
 }
 
 </style>
