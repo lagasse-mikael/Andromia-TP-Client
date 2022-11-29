@@ -1,7 +1,13 @@
 <template>
-<div class="card-size">
-    
+<div class="card-size" style="">
     <div class="row">
+        <!--Je sais que ca n'a pas d'affaire la, mais ca marche..?-->
+        <div v-if="exploration.creature && !exploration.creatureHasBeenFought" class="row" style="height:42px">
+            <h4 style="text-align:center;background-color:red;border-radius: 10px 10px 0px 0px;">En attente d'un combat.</h4>
+        </div>
+        <div v-else-if="exploration.creature && exploration.creatureHasBeenFought" class="row" style="height:42px">
+            <h4 style="text-align:center;background-color:green;border-radius: 10px 10px 0px 0px;">La créature a été combattue</h4>
+        </div>
         <div class="col-7">
             <h1 class="mt-1">{{ exploration.destination }}</h1>
             <h5 class="mb-1" style="font-style: italic;">{{ exploration.explorationDate.split('T')[0] }}</h5>
@@ -22,16 +28,15 @@
                         ]">Affinity : {{ exploration.affinity }}</h1>
         </div>
         <div v-if="exploration.creature" class="col-5">
-            <img style="width:100%" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
+            <img style="height:87.875px" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
+            
+            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning btn-sm mt-2">💥Combattre</button></div>
         </div>
-
         <div v-else class="col-5">
-            Pas de creature
+            <!-- Pas de creature -->
         </div>
-
     </div>
-
-    <h2>Loot :</h2>
+    <h2 style="margin-top: -5px;" >Loot :</h2>
     <div class="container">
     <div v-if="exploration.vault" class="row">
         <span v-for="element in exploration.vault.elements" class="col-4 text-bold">
@@ -55,7 +60,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
     exploration: {
         type: Object,
@@ -67,9 +71,8 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .card-size{
-
     width: auto;
-    height: auto;
+    height: 700px;
 }
 
 .bg-orange{
