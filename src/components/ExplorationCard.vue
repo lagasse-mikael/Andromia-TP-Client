@@ -21,12 +21,12 @@
                         exploration.affinity == 'water' ? 'bg-info': 'bg-secondary'
                         ]">Affinity : {{ exploration.affinity }}</h1>
         </div>
-        <div v-if="exloration.creature" class="col-5">
-            <img class="img-fuid mx-auto " v-bind:src="exploration.Creature.asset" :alt="creature.asset"/>
+        <div v-if="exploration.creature" class="col-5">
+            <img style="width:100%" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
         </div>
 
         <div v-else class="col-5">
-            pas de creature
+            Pas de creature
         </div>
 
     </div>
