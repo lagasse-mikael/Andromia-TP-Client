@@ -1,22 +1,28 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import {onMounted} from 'vue';
+import {onMounted } from 'vue';
+import axios from 'axios';
+import { useUserInfosStore } from './stores/userInfos';
 
 const server_url = import.meta.env.VITE_SERVER_URL
+const UserInfos = useUserInfosStore();
+const refresh_token_ms = import.meta.env.VITE_REFRESH_TOKEN_MS
 
 onMounted(() => {
-  console.log("Penis");
-    // setInterval(refreshToken, 50000);
+  setInterval(refreshToken, refresh_token_ms);
 })
 
 async function refreshToken(){
-  try{
+  //Au moment où l'application part et que la personne n'est pas log in
+  if(!UserInfos.acces_token) return; 
+
+  try{    
     const response = await axios.post(`${server_url}/refresh`, {
       "refresh_token": UserInfos.refresh_token
     });
     if(response.status == 200){
       UserInfos.access_token = response.data.access_token;
-      UserInfos.refresh_token = response.data.refresh_token;   
+      UserInfos.refresh_token = response.data.refresh_token;
     }
 
   } catch (err){

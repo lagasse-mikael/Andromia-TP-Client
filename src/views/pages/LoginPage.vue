@@ -4,7 +4,7 @@
 			<article class="text-center mb-5">
 				<img class="my-3" src="../../assets/img/andromia-logo.png" width="75" height="75">
 				<h1>Bienvenue sur <span id="title">Andromia TP</span></h1>
-				<i style="font-size:1.125em">parce que fight des créatures, c'est <b>Andromia en criss</b></i>
+				<i style="font-size:1.125em">parce que combattre des créatures, c'est <b>Andromia en ciboulette</b></i>
 			</article>
 			<article class="col-6 offset-3 d-flex">
 				<form class="mx-2 form " @submit="onSubmit">
