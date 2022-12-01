@@ -12,18 +12,10 @@
           </p>
         </div>
         <div class="my-3">
-          <Field name="prenom" v-model="prenom" class="justify-content-start p-1 col-4 rounded" type="text"
-            placeholder="Prenom" validateOnInput />
-          <!--<p><ErrorMessage class="erreurForm" name="prenom"/></p>-->
-          <Field name="nom" v-model="nom" class="col-4 justify-content-end p-1 rounded" type="text" placeholder="Nom"
-            validateOnInput />
-          <!--<p><ErrorMessage class="erreurForm" name="nom"/></p>-->
-        </div>
-        <div class="my-3">
-          <Field name="mot_de_passe" v-model="mot_de_passe" class="col-6 rounded" placeholder="Mot de passe"
+          <Field name="password" v-model="password" class="col-6 rounded" placeholder="Mot de passe"
             type="password" validateOnInput />
           <p>
-            <ErrorMessage class="erreurForm" name="mot_de_passe" />
+            <ErrorMessage class="erreurForm" name="password" />
           </p>
         </div>
         <div class="my-3">
@@ -34,10 +26,10 @@
           </p>
         </div>
         <div class="my-3">
-          <Field name="courriel" v-model="courriel" class="col-6 rounded" type="text" placeholder="Addresse courielle"
+          <Field name="email" v-model="email" class="col-6 rounded" type="text" placeholder="Addresse courriel"
             validateOnInput />
           <p>
-            <ErrorMessage class="erreurForm" name="courriel" />
+            <ErrorMessage class="erreurForm" name="email" />
           </p>
         </div>
         <div class="col-4 my-3 mx-auto">
@@ -55,31 +47,29 @@
 import MainLayout from '../layouts/MainLayout.vue';
 import { inject, onMounted, ref } from 'vue';
 import router from '../../router/index.js';
+import { useUserInfosStore } from '../../stores/userInfos.js';
 import { useToast } from "vue-toastification";
 
 //Vee-Validate pour les champs du form
 import { useField, useForm, Form, ErrorMessage, Field } from 'vee-validate';
 import * as yup from 'yup';
 
+const userInfosStore = useUserInfosStore();
 const server_url = import.meta.env.VITE_SERVER_URL
 
-const axios = inject('axios');
+import axios from 'axios';
 const toast = useToast();
 
 const creationCompte = yup.object({
   username: yup.string().required("Votre nom est requis")
     .min(5, "Votre nom d'utilisateur doit contenir au moins 5 caractères.")
     .max(30, "votre nom d'utilisateur doit avoir 30 caractères maximum"),
-  prenom: yup.string().required("Votre prénom est requis")
-    .min(2, "Votre prénom doit avoir au moins 2 caractères"),
-  nom: yup.string().required("Votre nom est requis")
-    .min(2, "Votre nom doit avoir au moins 2 caractères"),
-  mot_de_passe: yup.string().required("Un mot de passe est requis")
+  password: yup.string().required("Un mot de passe est requis")
     .min(2, "Votre mot de passe doit avoir au moins 2 caractères")
     .max(15, "Votre mot de passe doit avoir 15 caractères maximum"),
   confirmation_mdp: yup.string()
-    .oneOf([yup.ref('mot_de_passe'), null], "Les mots de passes doivent être identiques"),
-  courriel: yup.string().required("Votre courriel est requis")
+    .oneOf([yup.ref('password'), null], "Les mots de passes doivent être identiques"),
+  email: yup.string().required("Votre courriel est requis")
     .min(2, "Votre courriel doit avoir au moins 2 caractères.")
 });
 
@@ -91,15 +81,35 @@ function onSubmit(values) {
 
 async function createUser(user) {
   try {
-    const res = await axios.post(`${server_url}/utilisateurs/creation`, user);
+    console.log(user);
+    delete user.confirmation_mdp;
+    const res = await axios.post(`${server_url}/explorers/create`, user);
+    console.log(res);
+
     if (res.status === 201) {
-      console.log("User created !");
-      console.log(res);
-      router.push('/');
+     	userInfosStore.access_token = res.data.tokens.access_token
+			userInfosStore.refresh_token = res.data.tokens.refresh_token
+			userInfosStore.userName = res.data.username;
+			router.push('/homePage')
+
+      toast.success("Bienvenue sur Andromia " + res.data.username + " !" , {
+				position: "bottom-center",
+				timeout: 7000,
+				closeOnClick: true,
+				pauseOnFocusLoss: false,
+				pauseOnHover: true,
+				draggable: true,
+				draggablePercent: 0.6,
+				showCloseButtonOnHover: false,
+				hideProgressBar: true,
+				closeButton: "button",
+				icon: true,
+				rtl: false
+			});
     }
   } catch (err) {
     console.log(err);
-    toast.warning(`Username déjà utilisé`, {
+    toast.warning(`Érreur lors de la création de compte`, {
       position: "bottom-center",
       timeout: 3500,
       closeOnClick: true,
