@@ -1,44 +1,51 @@
 <template>
-  <div class="row	center col-5">
-    <!-- Formualaire creation de compte -->
-    <div class=" formulaire col-8 row my-5 offset-2 text-right rounded">
-      <h1 class="text-center my-3"> Crée votre compte Andromia</h1>
-      <Form class="my-3" :validation-schema="creationCompte" @submit="onSubmit" v-slot="{ meta }">
-        <div class="my-3">
-          <Field name="username" v-model="username" class="rounded col-9" type="text" placeholder="Nom d'utilisateur"
-            validateOnInput />
-          <p>
-            <ErrorMessage class="erreurForm" name="username" />
-          </p>
-        </div>
-        <div class="my-3">
-          <Field name="password" v-model="password" class="col-6 rounded" placeholder="Mot de passe"
-            type="password" validateOnInput />
-          <p>
-            <ErrorMessage class="erreurForm" name="password" />
-          </p>
-        </div>
-        <div class="my-3">
-          <Field name="confirmation_mdp" v-model="confirmation_mdp" class="col-6 rounded" placeholder="Confirmer"
-            type="password" validateOnInput />
-          <p>
-            <ErrorMessage class="erreurForm" name="confirmation_mdp" />
-          </p>
-        </div>
-        <div class="my-3">
-          <Field name="email" v-model="email" class="col-6 rounded" type="text" placeholder="Addresse courriel"
-            validateOnInput />
-          <p>
-            <ErrorMessage class="erreurForm" name="email" />
-          </p>
-        </div>
-        <div class="col-4 my-3 mx-auto">
-          <button class="px-2 btn btn-secondary" :disabled="!meta.valid" type="submit">Créer votre compte</button>
-        </div>
-      </Form>
-      <RouterLink to="/">
-        <button class="mb-2 btn btn-secondary">Retour</button>
-      </RouterLink>
+  <div id="creationComptePage">
+    <div class="row	center col-6">
+      <!-- Formualaire creation de compte -->
+      <div id="creation" class="col-8 row my-5 offset-2 border shadow text-right ">
+        <h1 class="text-center my-3"> Créer votre compte Andromia</h1>
+        <Form class="my-3" :validation-schema="creationCompte" @submit="onSubmit" v-slot="{ meta }">
+          <div class="my-3">
+            <label class="col-4">Nom d'utilisateur</label>
+            <Field name="username" v-model="username" class="col-7 rounded" type="text" placeholder="Nom d'utilisateur"
+              validateOnInput />
+            <p>
+              <ErrorMessage class="erreurForm" name="username" />
+            </p>
+          </div>
+          <div class="my-3">
+            <label class="col-4">Mot de passe</label>
+            <Field name="password" v-model="password" class=" col-7 rounded" placeholder="Mot de passe" type="password"
+              validateOnInput />
+            <p>
+              <ErrorMessage class="erreurForm" name="password" />
+            </p>
+          </div>
+          <div class="my-3">
+            <label class="col-4">Confirmation</label>
+            <Field name="confirmation_mdp" v-model="confirmation_mdp" class="col-7 rounded" placeholder="Confirmer"
+              type="password" validateOnInput />
+            <p>
+              <ErrorMessage class="erreurForm" name="confirmation_mdp" />
+            </p>
+          </div>
+          <div class="my-3">
+            <label class="col-4">Adresse E-mail</label>
+            <Field name="email" v-model="email" class="col-7 rounded" type="text" placeholder="Addresse courriel"
+              validateOnInput />
+            <p>
+              <ErrorMessage class="erreurForm" name="email" />
+            </p>
+          </div>
+          <div class="col-7 my-3 mx-auto d-flex justify-content-between">
+            <button class="px-2 btn btn-secondary col-6" :disabled="!meta.valid" type="submit">Créer votre compte</button>
+          <RouterLink to="/">
+            <button class="justify-content-end btn btn-secondary">Retour</button>
+          </RouterLink>
+          </div>
+        </Form>
+
+      </div>
     </div>
   </div>
 </template>
@@ -87,25 +94,25 @@ async function createUser(user) {
     console.log(res);
 
     if (res.status === 201) {
-     	userInfosStore.access_token = res.data.tokens.access_token
-			userInfosStore.refresh_token = res.data.tokens.refresh_token
-			userInfosStore.userName = res.data.username;
-			router.push('/homePage')
+      userInfosStore.access_token = res.data.tokens.access_token
+      userInfosStore.refresh_token = res.data.tokens.refresh_token
+      userInfosStore.userName = res.data.username;
+      router.push('/homePage')
 
-      toast.success("Bienvenue sur Andromia " + res.data.username + " !" , {
-				position: "bottom-center",
-				timeout: 7000,
-				closeOnClick: true,
-				pauseOnFocusLoss: false,
-				pauseOnHover: true,
-				draggable: true,
-				draggablePercent: 0.6,
-				showCloseButtonOnHover: false,
-				hideProgressBar: true,
-				closeButton: "button",
-				icon: true,
-				rtl: false
-			});
+      toast.success("Bienvenue sur Andromia " + res.data.username + " !", {
+        position: "bottom-center",
+        timeout: 7000,
+        closeOnClick: true,
+        pauseOnFocusLoss: false,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: true,
+        closeButton: "button",
+        icon: true,
+        rtl: false
+      });
     }
   } catch (err) {
     console.log(err);
@@ -133,6 +140,20 @@ const date = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + curr
 .erreurForm {
   color: red;
   font-size: 0.9em;
+}
+
+
+#creationComptePage {
+  background-image: url('../../img/solar-system.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
+
+#creation {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(8, 40, 109);
+  border-radius: 13px;
 }
 
 .center {
