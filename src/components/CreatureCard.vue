@@ -112,8 +112,7 @@ const props = defineProps({
   position: absolute;
   border-radius: 6%;
   width: 100%;
-  height: 100%;
-  // -webkit-backface-visibility: hidden; /* Safari */
+  height: 100%; 
   backface-visibility: hidden;
 }
 
