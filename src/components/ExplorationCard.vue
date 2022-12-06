@@ -3,10 +3,10 @@
     <div class="row">
         <!--Je sais que ca n'a pas d'affaire la, mais ca marche..?-->
         <div v-if="exploration.creature && !exploration.creatureHasBeenFought" class="row" style="height:42px">
-            <h4 style="text-align:center;background-color:red;border-radius: 10px 10px 0px 0px;">En attente d'un combat.</h4>
+            <h4 style="text-align:center;border-radius: 10px 10px 0px 0px;" class="bg-danger bg-gradient">En attente d'un combat.</h4>
         </div>
         <div v-else-if="exploration.creature && exploration.creatureHasBeenFought" class="row" style="height:42px">
-            <h4 style="text-align:center;background-color:green;border-radius: 10px 10px 0px 0px;">La créature a été combattue</h4>
+            <h4 style="text-align:center;border-radius: 10px 10px 0px 0px;" class="bg-success bg-gradient">La créature a été combattue</h4>
         </div>
         <div class="col-7">
             <h1 class="mt-1">{{ exploration.destination }}</h1>
@@ -30,7 +30,7 @@
         <div v-if="exploration.creature" class="col-5">
             <img style="height:87.875px" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
             
-            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning btn-sm mt-2">💥Combattre</button></div>
+            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning bg-gradiant btn-sm mt-2">💥Combattre</button></div>
         </div>
         <div v-else class="col-5">
             <!-- Pas de creature -->

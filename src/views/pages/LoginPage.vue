@@ -1,6 +1,6 @@
 <template>
 	<div id="loginPage" class="mx-auto">
-		<div class="row	center" id="login">
+		<div class="row	center rounded-5 w-50 " id="login">
 			<article class="text-center mb-5">
 				<img class="my-3" src="../../assets/img/andromia-logo.png" width="75" height="75">
 				<h1>Bienvenue sur <span id="title">Andromia TP</span></h1>
@@ -139,5 +139,17 @@ function creerCompte(){
 .erreurForm {
 	font-size: 0.81em;
 
+}
+
+#loginPage {
+  background-image: url('../../img/solar-system.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
+
+#login {
+	backdrop-filter: blur(50px);
+	box-shadow: 0px 0px 50px 0px white;
 }
 </style>

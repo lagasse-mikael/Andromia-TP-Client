@@ -1,7 +1,6 @@
 <template>
   <MainLayout :title="`Historique d'explorations de ` + UserInfos.userName ">
     <div class="px-4 container-fluid">
-      <button @click="testToken()">Test</button>
       <div class="row">
         <div class="card col-3 m-2 card-size" v-for="exploration in explorations">
             <ExplorationCard :exploration="exploration" />

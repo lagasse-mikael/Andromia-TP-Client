@@ -2,7 +2,7 @@
   <div id="creationComptePage">
     <div class="row	center col-6">
       <!-- Formualaire creation de compte -->
-      <div id="creation" class="col-8 row my-5 offset-2 border shadow text-right ">
+      <div id="creation" class="col-8 row my-5 offset-2 text-right rounded-5">
         <h1 class="text-center my-3"> Créer votre compte Andromia</h1>
         <Form class="my-3" :validation-schema="creationCompte" @submit="onSubmit" v-slot="{ meta }">
           <div class="my-3">
@@ -151,9 +151,12 @@ const date = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + curr
 }
 
 #creation {
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  background-color: rgb(8, 40, 109);
-  border-radius: 13px;
+  // box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  // background-color: rgb(8, 40, 109);
+  // border-radius: 13px;
+
+  backdrop-filter: blur(50px);
+	box-shadow: 0px 0px 50px 0px white;
 }
 
 .center {

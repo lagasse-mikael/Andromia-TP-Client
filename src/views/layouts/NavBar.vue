@@ -10,7 +10,7 @@
             <ul class="navbar-nav justify-content-end ms-md-auto">
                 <li class="nav-item d-flex align-items-center">
                 <a href="#modLogin" class="px-0 nav-link font-weight-bold text-white" data-bs-toggle="modal" data-bs-target="#modLogin">
-                    <button class="d-sm-inline d-none btn btn-light" @click="disconnect()" >Deconnexion</button>
+                    <button class="d-sm-inline d-none btn btn-light bg-gradient" @click="disconnect()" >Deconnexion</button>
                 </a>
                 </li>
             </ul>
@@ -38,7 +38,7 @@ function disconnect(){
     userInfos.refresh_token = "" 
     router.push("/")
 
-    toast.success("Vous êtes déconnecté, à la prochaine !" , {
+    toast.warning("Vous êtes déconnecté, à la prochaine !" , {
 				position: "bottom-center",
 				timeout: 7000,
 				closeOnClick: true,
