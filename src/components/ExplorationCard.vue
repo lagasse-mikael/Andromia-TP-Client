@@ -1,12 +1,12 @@
 <template>
-<div class="card-size" style="">
+<div id="cardUniform" class="rounded-5 card-size" style="">
     <div class="row">
         <!--Je sais que ca n'a pas d'affaire la, mais ca marche..?-->
         <div v-if="exploration.creature && !exploration.creatureHasBeenFought" class="row" style="height:42px">
-            <h4 style="text-align:center;border-radius: 10px 10px 0px 0px;" class="bg-danger bg-gradient">En attente d'un combat.</h4>
+            <h4 style="text-align:center;" class="text-danger text-gradient mt-2">En attente d'un combat.</h4>
         </div>
         <div v-else-if="exploration.creature && exploration.creatureHasBeenFought" class="row" style="height:42px">
-            <h4 style="text-align:center;border-radius: 10px 10px 0px 0px;" class="bg-success bg-gradient">La créature a été combattue</h4>
+            <h4 style="text-align:center;" class="text-success text-gradient">La créature a été combattue</h4>
         </div>
         <div class="col-7">
             <h1 class="mt-1">{{ exploration.destination }}</h1>
@@ -91,6 +91,12 @@ background-color:#964B00;
   text-align: center;
   vertical-align: middle;
   line-height: 80%;
+}
+
+#cardUniform{
+    padding: 12px 12px 12px 18px;
+	backdrop-filter: blur(20px);
+	box-shadow: 0px 0px 50px 0px white;
 }
 
 </style>
