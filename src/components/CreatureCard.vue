@@ -2,12 +2,11 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
+        <div id="preferredCreature" v-if="connectedUserCreatureId == creature._id || isTheNewDefault"
+          style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>
         <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
         <h1 class="center-text">{{ creature.name }}</h1>
-        <img
-          style="width: 2em"
-          class="img-fluid mx-auto"
-          :src="'/img/affinities/' + creature.affinity + '.png'"
+        <img style="width: 2em" class="img-fluid mx-auto" :src="'/img/affinities/' + creature.affinity + '.png'"
           alt="{{creature.affinity}}" />
         <h5>
           <i class="center-text"> - {{ creature.affinity }} - </i>
@@ -20,28 +19,26 @@
         <div class="container">
           <div class="row">
             <div class="col-3" v-for="stat in Object.keys(creature.stats)">
-              <img
-                style="width: 35px"
-                :src="'/img/icons/creature/' + stat + '.png'"
-                alt="{{stat}}.png"
-              /><br />
+              <img style="width: 35px" :src="'/img/icons/creature/' + stat + '.png'" alt="{{stat}}.png" /><br />
               <span style="font-size: 32px"> {{ creature.stats[stat] }}</span>
             </div>
           </div>
           <hr />
           <div class="row mt-2">
             <h4>Nombre de combat gagné</h4>
-            <h3>{{creature.stats.nbCombatGagne}}</h3>
-            <!-- TODO: mettre le nombre réelle -->
+            <!-- <h3>{{creature.stats.nbCombatGagne}}</h3> -->
+            <h3>0</h3>
           </div>
 
           <div class="row mt-2">
             <div class="col-6" v-for="book in creature.books">
-              <img
-                style="width: 55px"
-                :src="'/img/icons/creature/books/' + book + '.png'"
-                alt="{{book}}.png"
-              /><br />
+              <img style="width: 55px" :src="'/img/icons/creature/books/' + book + '.png'" alt="{{book}}.png" /><br />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <span v-if="connectedUserCreatureId != creature._id || !isTheNewDefault" class="btn btn-light"
+                @click="setCreatureAsPreferred(creature._id)">Assigner comme creature par defaut</span>
             </div>
           </div>
         </div>
@@ -51,18 +48,47 @@
 </template>
 
 <script setup>
+import { inject, onMounted, ref } from "vue";
+import axios from 'axios';
+import { useUserInfosStore } from '../stores/userInfos';
+const server_url = import.meta.env.VITE_SERVER_URL;
+
+const UserInfos = useUserInfosStore();
 const props = defineProps({
-    creature: {
-        type: Object,
-        required: true
-    }
+  creature: {
+    type: Object,
+    required: true
+  },
+  connectedUserCreatureId: {
+    type: String,
+    required: true
+  }
 })
+
+const isTheNewDefault = ref(false)
+
+async function setCreatureAsPreferred(creatureId) {
+  const response = await axios.post(`${server_url}/explorers/combatCreature`,
+    {
+      creatureId: creatureId
+    },
+    {
+      headers: {
+        'Authorization': `Bearer ${UserInfos.access_token}`
+      }
+    });
+
+    if(response.status == 200){
+      const currentShownStar = document.getElementById('preferredCreature')
+      currentShownStar.remove()
+      isTheNewDefault.value = true;
+    }
+}
 
 </script>
 
 <style lang="scss" scoped>
-
-.imgSize{
+.imgSize {
   width: 230px;
   height: auto;
 }
@@ -112,7 +138,7 @@ const props = defineProps({
   position: absolute;
   border-radius: 6%;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   backface-visibility: hidden;
 }
 
