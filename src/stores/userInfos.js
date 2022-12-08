@@ -6,7 +6,8 @@ export const useUserInfosStore = defineStore({
     return {
       userName: "",
       access_token: "",
-      refresh_token: ""
+      refresh_token: "",
+      userLocation:""
     }
   },
   persist: true

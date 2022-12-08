@@ -30,6 +30,7 @@ const server_url = import.meta.env.VITE_SERVER_URL
 
 const userInfos = useUserInfosStore();
 let userVault = ref({})
+let userLocation = ref({})
 
 onMounted(() => {
   axios.get(`${server_url}/explorers/vault`,{
@@ -40,6 +41,9 @@ onMounted(() => {
     userVault.value = response.data
     document.getElementById('inoxBalance').innerText = " Inox : " + userVault.value.inox
   })
+
+  userLocation.value = userInfos.userLocation
+  document.getElementById('explorerLocation').innerText =  userLocation.value;
 })
 
 </script>
