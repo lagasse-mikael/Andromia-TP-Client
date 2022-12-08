@@ -170,12 +170,6 @@
   @each $color, $value in $theme-colors {
     &[data-color="#{$color}"] {
       .navbar-nav > .nav-item > .nav-link.active {
-        @include gradient-directional(
-          nth(#{$value}, 1) 0%,
-          nth(#{$value}, -1) 100%,
-          $deg: 310deg
-        );
-
         .icon i,
         .nav-link-text {
           color: $white !important;

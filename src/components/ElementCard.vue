@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="cards" id="elementCard">
         <img style="max-width: 7em;"
             v-bind:src="element.image"
             v-bind:title="element.element"
@@ -28,4 +28,19 @@ const props = defineProps({
   line-height: 80%;
 }
 
+#elementCard {
+	backdrop-filter: blur(20px) !important;
+	box-shadow: 0px 0px 15px 0px white ;
+}
+.cards{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 1rem;
+
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="min-height-300 position-absolute w-100 bg-transparent"></div>
+  <div class="min-height-300 position-absolute w-100"></div>
   <aside
-    class="my-3 overflow-auto border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl fixed-start ms-3 bg-default"
+    class="my-3 overflow-auto border-0 sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl fixed-start ms-3"
     id="sidenav-main"
     data-color="dark"
   >
@@ -27,7 +27,7 @@
           src="@/assets/img/icons/inox.png"
           alt="inoxImg"
           class="imgIcon"/>
-        <span id="inoxBalance" style="font-weight:bold; margin-left: -20px;"> Inox : --</span>
+        <span id="inoxBalance" style="color:white; font-weight:bold; margin-left: -20px;"> Inox : --</span>
       </div>
       <ul class="navbar-nav">
         <SideBarItem url="/homePage" text="Historique d'explorations">
@@ -80,6 +80,16 @@ import SideBarItem from './SideBarItem.vue';
 .imgIcon{
   height: 70px;
   width: 70px;
+}
+
+#sidenav-main{
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  background-size: cover;
+  backdrop-filter: blur(20px);
+	box-shadow: 0px 0px 15px 0px white;
+
 }
 
 </style>
