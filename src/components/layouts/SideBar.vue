@@ -32,7 +32,7 @@
 
       <div style="text-align:center; margin-top: -15px; margin-bottom: 15px;" >
         <i class="ni ni-pin-3 text-light text-sm opacity-10 m-2"></i>
-        <span id="explorerLocation" style="font-weight:bold; font-style: italic;" >
+        <span id="explorerLocation" style="font-weight:bold; font-style: italic;" class="text-light">
         </span>
       </div>
       <ul class="navbar-nav">
