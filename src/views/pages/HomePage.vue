@@ -28,10 +28,6 @@ onMounted(() => {
   
 })
 
-async function testToken(){
-
-}
-
 async function retrieveExplorerExplorations() {
   try {
     const response = await axios.get(`${server_url}/explorers/explorations`, {

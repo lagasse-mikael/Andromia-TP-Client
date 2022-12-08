@@ -19,7 +19,7 @@
 						<span class="erreurForm"> {{ errMdp }}</span>
 					</div>
 					<div class="text-center">
-						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary">Connexion</button>
+						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary btn-lg">Connexion</button>
 					</div>
 
 					<div class="text-center m-3">
@@ -76,7 +76,8 @@ async function login(user) {
 		if (res.status === 200) {
 			userInfosStore.access_token = res.data.tokens.access_token
 			userInfosStore.refresh_token = res.data.tokens.refresh_token
-			userInfosStore.userName = res.data.username;
+			userInfosStore.userName = res.data.username
+			userInfosStore.userLocation = res.data.location
 			router.push('/homePage')
 
 			toast.success("Bienvenue sur Andromia " + res.data.username + " !" , {

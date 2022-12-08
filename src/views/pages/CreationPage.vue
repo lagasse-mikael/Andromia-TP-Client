@@ -38,9 +38,9 @@
             </p>
           </div>
           <div class="col-7 my-3 mx-auto d-flex justify-content-between">
-            <button class="px-2 btn btn-secondary col-6" :disabled="!meta.valid" type="submit">Créer votre compte</button>
+            <button class="px-2 btn btn-secondary  col-6" :disabled="!meta.valid" type="submit">Créer votre compte</button>
           <RouterLink to="/">
-            <button class="justify-content-end btn btn-secondary">Retour</button>
+            <button class="justify-content-end btn btn-secondary ">Retour</button>
           </RouterLink>
           </div>
         </Form>
