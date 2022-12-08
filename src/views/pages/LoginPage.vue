@@ -3,7 +3,7 @@
 		<div class="row	center rounded-5 w-50 " id="login">
 			<article class="text-center mb-5">
 				<img class="my-3" src="../../assets/img/andromia-logo.png" width="75" height="75">
-				<h1>Bienvenue sur <span id="title">Andromia TP</span></h1>
+				<h1>Bienvenue sur <span id="title">Andromia</span></h1>
 				<i style="font-size:1.125em">parce que combattre des créatures, c'est <b>Andromia en ciboulette</b></i>
 			</article>
 			<article class="col-6 offset-3 d-flex">
