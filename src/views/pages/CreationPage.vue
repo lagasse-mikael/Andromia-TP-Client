@@ -144,7 +144,7 @@ const date = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + curr
 
 
 #creationComptePage {
-  background-image: url('../../img/solar-system.jpg');
+
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -156,7 +156,7 @@ const date = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + curr
   // border-radius: 13px;
 
   backdrop-filter: blur(50px);
-	box-shadow: 0px 0px 50px 0px white;
+	box-shadow: 0px 0px 15px 0px white;
 }
 
 .center {

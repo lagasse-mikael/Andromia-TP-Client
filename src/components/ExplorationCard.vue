@@ -96,7 +96,7 @@ background-color:#964B00;
 #cardUniform{
     padding: 12px 12px 12px 18px;
 	backdrop-filter: blur(20px);
-	box-shadow: 0px 0px 50px 0px white;
+	box-shadow: 0px 0px 15px 0px white;
 }
 
 </style>
