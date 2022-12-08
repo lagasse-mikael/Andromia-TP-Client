@@ -19,7 +19,7 @@
 						<span class="erreurForm"> {{ errMdp }}</span>
 					</div>
 					<div class="text-center">
-						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary">Connexion</button>
+						<button type="submit" :disabled="!meta.valid" class="btn btn-secondary btn-lg">Connexion</button>
 					</div>
 
 					<div class="text-center m-3">
