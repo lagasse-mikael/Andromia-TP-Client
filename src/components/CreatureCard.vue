@@ -1,7 +1,7 @@
 <template>
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">
+      <div :id="creature._id + '_frontCard'" class="flip-card-front">
         <div id="preferredCreature" v-if="connectedUserCreatureId == creature._id || isTheNewDefault"
           style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>
         <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
@@ -37,7 +37,7 @@
           </div>
           <div class="row mt-2">
             <div class="col-12">
-              <span v-if="connectedUserCreatureId != creature._id || !isTheNewDefault" class="btn btn-light"
+              <span v-if="connectedUserCreatureId != creature._id" class="btn btn-light"
                 @click="setCreatureAsPreferred(creature._id)">Assigner comme creature par defaut</span>
             </div>
           </div>
@@ -81,7 +81,10 @@ async function setCreatureAsPreferred(creatureId) {
     if(response.status == 200){
       const currentShownStar = document.getElementById('preferredCreature')
       currentShownStar.remove()
-      isTheNewDefault.value = true;
+      
+      const ourFrontCard = document.getElementById(`${creatureId}_frontCard`)
+      ourFrontCard.prepend(`        <div id="preferredCreature"
+          style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>`)
     }
 }
 
