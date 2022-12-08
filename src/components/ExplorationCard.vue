@@ -3,7 +3,7 @@
     <div class="row">
         <!--Je sais que ca n'a pas d'affaire la, mais ca marche..?-->
         <div v-if="exploration.creature && !exploration.creatureHasBeenFought" class="row" style="height:42px">
-            <h4 style="text-align:center;" class="text-danger text-gradient mt-2">En attente d'un combat.</h4>
+            <h4 style="text-align:center;cursor:pointer ;" class="text-danger text-gradient mt-2">En attente d'un combat.</h4>
         </div>
         <div v-else-if="exploration.creature && exploration.creatureHasBeenFought" class="row" style="height:42px">
             <h4 style="text-align:center;" class="text-success text-gradient">La créature a été combattue</h4>
@@ -30,7 +30,7 @@
         <div v-if="exploration.creature" class="col-5">
             <img style="height:87.875px" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
             
-            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning bg-gradiant btn-sm mt-2">💥Combattre</button></div>
+            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning bg-gradiant btn-sm mt-2" @click="initFight(exploration.creature._id)">💥Combattre</button></div>
         </div>
         <div v-else class="col-5">
             <!-- Pas de creature -->
@@ -60,12 +60,18 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+
 const props = defineProps({
     exploration: {
         type: Object,
         required: true
     }
 })
+
+function initFight(creatureId) {
+    alert(`${creatureId} , pif paf pouf !`);
+}
 
 </script>
 

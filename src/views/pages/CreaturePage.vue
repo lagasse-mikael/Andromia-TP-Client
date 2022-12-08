@@ -2,7 +2,7 @@
   <MainLayout :title="'Les créatures à ' + UserInfos.userName">
     <div class="py-4 row">
       <div class="col-md-2 col-sm-6 col-6 mx-4" v-for="creature in creatures">
-        <CreatureCard :creature="creature" />
+        <CreatureCard :creature="creature" :connectedUserCreatureId="userCombatCreature._id" />
       </div>
     </div>
   </MainLayout>
@@ -18,12 +18,14 @@ import CreatureCard from "../../components/CreatureCard.vue";
 
 // const axios = inject("axios");
 const creatures = ref([]);
+const userCombatCreature = ref({});
 const server_url = import.meta.env.VITE_SERVER_URL;
 
 const UserInfos = useUserInfosStore();
 
 onMounted(() => {
   retrieveExplorerCreatures();
+  retrieveExplorerCombatCreature();
 });
 
 async function retrieveExplorerCreatures() {
@@ -35,6 +37,21 @@ async function retrieveExplorerCreatures() {
     });
     if (response.status == 200) {
       creatures.value = response.data;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function retrieveExplorerCombatCreature() {
+  try {
+    const response = await axios.get(`${server_url}/explorers/combatCreature`, {
+      headers: {
+        Authorization: `Bearer ${UserInfos.access_token}`,
+      },
+    });
+    if (response.status == 200) {
+      userCombatCreature.value = response.data;
     }
   } catch (err) {
     console.log(err);
