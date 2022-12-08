@@ -31,7 +31,7 @@
           </div>
           <div class="my-3">
             <label class="col-4">Adresse E-mail</label>
-            <Field name="email" v-model="email" class="col-7 rounded" type="text" placeholder="Addresse courriel"
+            <Field name="email" v-model="email" class="col-7 rounded" type="email" placeholder="Addresse courriel"
               validateOnInput />
             <p>
               <ErrorMessage class="erreurForm" name="email" />
@@ -76,8 +76,8 @@ const creationCompte = yup.object({
     .max(15, "Votre mot de passe doit avoir 15 caractères maximum"),
   confirmation_mdp: yup.string()
     .oneOf([yup.ref('password'), null], "Les mots de passes doivent être identiques"),
-  email: yup.string().required("Votre courriel est requis")
-    .min(2, "Votre courriel doit avoir au moins 2 caractères.")
+  email: yup.string().email().required("Votre courriel est requis")
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,"Suivez le format suivant: test@gmail.ca")
 });
 
 
