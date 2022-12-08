@@ -117,11 +117,13 @@ const props = defineProps({
 }
 
 .flip-card-front {
-  background-color: #111c44;
+  backdrop-filter: blur(10px);
+	box-shadow: 0px 0px 15px 0px white;
 }
 
 .flip-card-back {
-  background-color: #111c44;
+  backdrop-filter: blur(20px);
+	box-shadow: 0px 0px 10px 0px white;
   transform: rotateY(180deg);
 }
 </style>
