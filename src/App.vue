@@ -6,11 +6,12 @@ import { useUserInfosStore } from './stores/userInfos';
 
 const server_url = import.meta.env.VITE_SERVER_URL
 const refresh_token_ms = import.meta.env.VITE_REFRESH_TOKEN_MS
+const refresh_user_data_ms = import.meta.env.VITE_REFRESH_USER_DATA_MS
 const UserInfos = useUserInfosStore();
 
 onMounted(() => {
   setInterval(refreshToken, refresh_token_ms);
-  setInterval(retrieveExplorerData, 1000);
+  setInterval(retrieveExplorerData, refresh_user_data_ms);
 })
 
 async function refreshToken(){
