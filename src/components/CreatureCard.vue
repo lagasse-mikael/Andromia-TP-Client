@@ -38,7 +38,7 @@
           <div class="row mt-2">
             <div class="col-12">
               <span v-if="connectedUserCreatureId != creature._id" class="btn btn-light"
-                @click="setCreatureAsPreferred(creature._id)">Assigner comme creature par defaut</span>
+                @click="setCreatureAsPreferred(creature._id)">Assigner comme créature par défaut</span>
             </div>
           </div>
         </div>
@@ -83,8 +83,11 @@ async function setCreatureAsPreferred(creatureId) {
       currentShownStar.remove()
       
       const ourFrontCard = document.getElementById(`${creatureId}_frontCard`)
-      ourFrontCard.prepend(`        <div id="preferredCreature"
-          style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>`)
+      let div = document.createElement("div");
+      div.id = "preferredCreature";
+      div.className = "prefered";
+      div.append("⭐"); // met l'étoile dans le div
+      ourFrontCard.prepend(div); // donne le div a la front card
     }
 }
 
@@ -154,5 +157,13 @@ async function setCreatureAsPreferred(creatureId) {
   backdrop-filter: blur(20px);
 	box-shadow: 0px 0px 10px 0px white;
   transform: rotateY(180deg);
+}
+
+.prefered{
+  width:100%;
+  text-align:left;
+  margin-left:10px;
+  font-size:1.8em;
+  margin-bottom:-30px
 }
 </style>
