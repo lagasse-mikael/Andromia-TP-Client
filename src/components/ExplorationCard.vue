@@ -62,6 +62,7 @@
 <script setup>
 import { onMounted } from 'vue';
 
+const emit = defineEmits(["proposeFight"])
 const props = defineProps({
     exploration: {
         type: Object,
@@ -70,7 +71,7 @@ const props = defineProps({
 })
 
 function initFight(creatureId) {
-    alert(`${creatureId} , pif paf pouf !`);
+    emit("proposeFight",creatureId)
 }
 
 </script>

@@ -1,10 +1,18 @@
 <template>
   <MainLayout :title="`Historique d'explorations de ` + UserInfos.userName ">
-    <div class="px-4 container-fluid">
+    <div v-if="!isFightingSomeone" class="px-4 container-fluid">
       <div class="row">
         <div class="col-3 m-2 card-size" v-for="exploration in explorations">
-            <ExplorationCard :exploration="exploration" />
+            <ExplorationCard :exploration="exploration" @proposeFight="startFight" />
         </div>
+      </div>
+    </div>
+    <div v-if="isFightingSomeone" class="px-4 container-fluid" style="background-color:rgba(0, 0, 0, 0.5);height:80vh;backdrop-filter: blur(10px);">
+      <div class="row">
+        <h1 class="col-12" style="text-align:center;margin-top:10px;font-size:2.5em">💥 Combat 💥</h1>
+      </div>
+      <div class="row">
+
       </div>
     </div>
   </MainLayout>
@@ -22,6 +30,8 @@ const explorations = ref([])
 const server_url = import.meta.env.VITE_SERVER_URL
 const toast = useToast();
 const UserInfos = useUserInfosStore();
+
+let isFightingSomeone = ref(false)
 
 onMounted(() => {
   retrieveExplorerExplorations();
@@ -41,6 +51,12 @@ async function retrieveExplorerExplorations() {
   } catch (err) {
     console.log(err);
   }
+}
+
+function startFight(vsCreatureID){
+  isFightingSomeone.value = true;
+  const myCreatureID = UserInfos.defaultCreatureID
+  console.log(myCreatureID + " vs " + vsCreatureID);
 }
 
 </script>
