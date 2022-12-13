@@ -79,6 +79,7 @@ async function login(user) {
 			userInfosStore.userName = res.data.username
 			userInfosStore.userLocation = res.data.location
 			userInfosStore.defaultCreatureID = res.data.combatCreature._id
+			userInfosStore.userId = res.data._id
 			router.push('/homePage')
 
 			toast.success("Bienvenue sur Andromia " + res.data.username + " !" , {
