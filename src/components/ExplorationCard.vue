@@ -60,6 +60,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { onMounted } from 'vue';
 
 const props = defineProps({
@@ -71,6 +72,11 @@ const props = defineProps({
 
 function initFight(creatureId) {
     alert(`${creatureId} , pif paf pouf !`);
+    try{
+        
+    } catch (err){
+
+    }
 }
 
 </script>

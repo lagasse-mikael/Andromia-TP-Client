@@ -38,7 +38,7 @@
           <div class="row mt-2">
             <div class="col-12">
               <span v-if="UserInfos.defaultCreatureID != creature._id" class="btn btn-light"
-                @click="setCreatureAsPreferred(creature._id)">Assigner comme créature par défaut</span>
+                @click="setCreatureAsPreferred(creature.uuid)">Assigner comme créature par défaut</span>
             </div>
           </div>
         </div>
