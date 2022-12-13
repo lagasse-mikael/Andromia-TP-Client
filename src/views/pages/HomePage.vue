@@ -36,7 +36,6 @@ async function retrieveExplorerExplorations() {
       }
     });
     if (response.status == 200) {
-      console.log(response);
       explorations.value = response.data
     }
   } catch (err) {

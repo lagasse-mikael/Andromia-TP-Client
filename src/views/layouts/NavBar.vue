@@ -36,6 +36,9 @@ const props = defineProps({
 function disconnect(){
     userInfos.access_token = ""
     userInfos.refresh_token = "" 
+    userInfos.userName = ""
+    userInfos.userLocation = ""
+    userInfos.userId = ""
     router.push("/")
 
     toast.warning("Vous êtes déconnecté, à la prochaine !" , {
