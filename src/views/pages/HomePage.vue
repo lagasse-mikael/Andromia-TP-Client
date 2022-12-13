@@ -11,9 +11,6 @@
       <div class="row">
         <h1 class="col-12" style="text-align:center;margin-top:10px;font-size:2.5em">💥 Combat 💥</h1>
       </div>
-      <div class="row">
-
-      </div>
     </div>
   </MainLayout>
 </template>
