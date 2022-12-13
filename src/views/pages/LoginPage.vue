@@ -78,6 +78,7 @@ async function login(user) {
 			userInfosStore.refresh_token = res.data.tokens.refresh_token
 			userInfosStore.userName = res.data.username
 			userInfosStore.userLocation = res.data.location
+			userInfosStore.defaultCreatureID = res.data.combatCreature._id
 			userInfosStore.userId = res.data._id
 			router.push('/homePage')
 

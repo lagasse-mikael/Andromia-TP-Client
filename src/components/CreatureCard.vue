@@ -2,7 +2,7 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div :id="creature._id + '_frontCard'" class="flip-card-front">
-        <div id="preferredCreature" v-if="connectedUserCreatureId == creature._id || isTheNewDefault"
+        <div id="preferredCreature" v-if="UserInfos.defaultCreatureID == creature._id"
           style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>
         <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
         <h1 class="center-text">{{ creature.name }}</h1>
@@ -37,7 +37,7 @@
           </div>
           <div class="row mt-2">
             <div class="col-12">
-              <span v-if="connectedUserCreatureId != creature._id" class="btn btn-light"
+              <span v-if="UserInfos.defaultCreatureID != creature._id" class="btn btn-light"
                 @click="setCreatureAsPreferred(creature._id)">Assigner comme créature par défaut</span>
             </div>
           </div>
@@ -58,14 +58,8 @@ const props = defineProps({
   creature: {
     type: Object,
     required: true
-  },
-  connectedUserCreatureId: {
-    type: String,
-    required: true
   }
 })
-
-const isTheNewDefault = ref(false)
 
 async function setCreatureAsPreferred(creatureId) {
   const response = await axios.post(`${server_url}/explorers/combatCreature`,
@@ -79,15 +73,7 @@ async function setCreatureAsPreferred(creatureId) {
     });
 
     if(response.status == 200){
-      const currentShownStar = document.getElementById('preferredCreature')
-      currentShownStar.remove()
-      
-      const ourFrontCard = document.getElementById(`${creatureId}_frontCard`)
-      let div = document.createElement("div");
-      div.id = "preferredCreature";
-      div.className = "prefered";
-      div.append("⭐"); // met l'étoile dans le div
-      ourFrontCard.prepend(div); // donne le div a la front card
+      UserInfos.defaultCreatureID = creatureId
     }
 }
 
