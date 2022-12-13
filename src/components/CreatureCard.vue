@@ -2,7 +2,7 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div :id="creature._id + '_frontCard'" class="flip-card-front">
-        <div id="preferredCreature" v-if="UserInfos.defaultCreatureID == creature._id"
+        <div id="preferredCreature" v-if="UserInfos.defaultCreatureUUID == creature.uuid"
           style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>
         <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
         <h1 class="center-text">{{ creature.name }}</h1>
@@ -37,7 +37,7 @@
           </div>
           <div class="row mt-2">
             <div class="col-12">
-              <span v-if="UserInfos.defaultCreatureID != creature._id" class="btn btn-light"
+              <span v-if="UserInfos.defaultCreatureUUID != creature.uuid" class="btn btn-light"
                 @click="setCreatureAsPreferred(creature.uuid)">Assigner comme créature par défaut</span>
             </div>
           </div>
@@ -61,10 +61,10 @@ const props = defineProps({
   }
 })
 
-async function setCreatureAsPreferred(creatureId) {
+async function setCreatureAsPreferred(creatureUUID) {
   const response = await axios.post(`${server_url}/explorers/combatCreature`,
     {
-      creatureId: creatureId
+      uuid: creatureUUID
     },
     {
       headers: {
@@ -72,8 +72,10 @@ async function setCreatureAsPreferred(creatureId) {
       }
     });
 
+    console.log(response);
+
     if(response.status == 200){
-      UserInfos.defaultCreatureID = creatureId
+      UserInfos.defaultCreatureUUID = response.data.combatCreature.uuid
     }
 }
 

@@ -9,7 +9,7 @@ export const useUserInfosStore = defineStore({
       refresh_token: "",
       userLocation:"",
       userId: "",
-      defaultCreatureID:""
+      defaultCreatureUUID:""
     }
   },
   persist: true
