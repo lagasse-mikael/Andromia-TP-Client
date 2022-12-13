@@ -30,7 +30,7 @@
         <div v-if="exploration.creature" class="col-5">
             <img style="height:87.875px" class="img-fluid mt-2" v-bind:src="exploration.creature.asset" :alt="exploration.creature.asset"/>
             
-            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning bg-gradiant btn-sm mt-2" @click="initFight(exploration.creature._id)">💥Combattre</button></div>
+            <div v-if="!exploration.creatureHasBeenFought" style="text-align:center;"><button class="btn btn-warning bg-gradiant btn-sm mt-2" @click="initFight(exploration.creature.uuid)">💥Combattre</button></div>
         </div>
         <div v-else class="col-5">
             <!-- Pas de creature -->
@@ -71,8 +71,8 @@ const props = defineProps({
     }
 })
 
-function initFight(creatureId) {
-    emit("proposeFight",creatureId)
+function initFight(creatureUUID) {
+    emit("proposeFight",creatureUUID)
 }
 
 </script>

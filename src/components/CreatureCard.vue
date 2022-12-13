@@ -72,8 +72,6 @@ async function setCreatureAsPreferred(creatureUUID) {
       }
     });
 
-    console.log(response);
-
     if(response.status == 200){
       UserInfos.defaultCreatureUUID = response.data.combatCreature.uuid
     }
