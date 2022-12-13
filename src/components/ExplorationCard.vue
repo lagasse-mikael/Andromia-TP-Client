@@ -63,6 +63,7 @@
 import axios from 'axios';
 import { onMounted } from 'vue';
 
+const emit = defineEmits(["proposeFight"])
 const props = defineProps({
     exploration: {
         type: Object,
@@ -71,12 +72,7 @@ const props = defineProps({
 })
 
 function initFight(creatureId) {
-    alert(`${creatureId} , pif paf pouf !`);
-    try{
-        
-    } catch (err){
-
-    }
+    emit("proposeFight",creatureId)
 }
 
 </script>
