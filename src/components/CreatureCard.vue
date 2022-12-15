@@ -2,7 +2,7 @@
   <div class="flip-card">
     <div class="flip-card-inner">
       <div :id="creature._id + '_frontCard'" class="flip-card-front">
-        <div id="preferredCreature" v-if="UserInfos.defaultCreatureUUID == creature.uuid"
+        <div id="preferredCreature" v-if="(UserInfos.defaultCreatureUUID == creature.uuid) && !forFight"
           style="width:100%;text-align:left;margin-left:10px;font-size:1.8em;margin-bottom:-30px">⭐</div>
         <img :src="creature.asset" :alt="creature.asset" class="img-fluid mx-auto imgSize" />
         <h1 class="center-text">{{ creature.name }}</h1>
@@ -24,7 +24,7 @@
             </div>
           </div>
           <hr />
-          <div class="row mt-2">
+          <div v-if="!forFight" class="row mt-2">
             <h4>Nombre de combat gagné</h4>
             <!-- <h3>{{creature.stats.nbCombatGagne}}</h3> -->
             <h3>0</h3>
@@ -37,7 +37,7 @@
           </div>
           <div class="row mt-2">
             <div class="col-12">
-              <span v-if="UserInfos.defaultCreatureUUID != creature.uuid" class="btn btn-light"
+              <span v-if="(UserInfos.defaultCreatureUUID != creature.uuid) && !forFight" class="btn btn-light"
                 @click="setCreatureAsPreferred(creature.uuid)">Assigner comme créature par défaut</span>
             </div>
           </div>
@@ -57,6 +57,10 @@ const UserInfos = useUserInfosStore();
 const props = defineProps({
   creature: {
     type: Object,
+    required: true
+  },
+  forFight: {
+    type: Boolean,
     required: true
   }
 })
